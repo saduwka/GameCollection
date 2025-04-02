@@ -1,17 +1,11 @@
 import React from "react";
 import styles from "./ConsoleCard.module.css";
 
-function ConsoleCard({ console }) {
+export default function ConsoleCard({ console: { name, image_background } }) {
   return (
     <div className={styles.consoleCard}>
-      <h3>{console.name}</h3>
-      <img
-        src={console.image_background}
-        alt={console.name}
-        className={styles.consoleCardImg}
-      />
+      <h3>{name}</h3>
+      <img src={image_background} alt={name} className={styles.consoleCardImg} />
     </div>
   );
 }
-
-export default ConsoleCard;

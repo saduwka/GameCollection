@@ -1,17 +1,15 @@
-/* src/pages/ConsolesPage/ConsolesPage.module.css */
-
-.consolesPage {
+.creatorsPage {
   display: flex;
   padding: 20px;
 }
 
-.consoleList {
+.creatorsList {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
   justify-content: space-evenly;
   align-items: flex-start; /* Обеспечивает равномерное размещение карточек */
-  margin: 20px;/* Равномерное распределение карточек по ширине */
+  margin: 20px; /* Равномерное распределение карточек по ширине */
 }
 
 .content {
@@ -26,6 +24,3 @@ h1 {
   margin-bottom: 20px;
   margin-left: 20px; /* Добавляет отступ слева для заголовка */
 }
-
-
-

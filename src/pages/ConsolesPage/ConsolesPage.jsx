@@ -22,7 +22,7 @@ function ConsolesPage() {
     <div className={styles.consolesPage}>
       <Sidebar />
       <div className={styles.content}>
-        <h1>Gaming Consoles</h1>
+        <h1>Gaming Platforms</h1>
         <div className={styles.consoleList}>
           {consoles.map((console) => (
             <Link key={console.id} to={`/consoles/${console.id}`}>

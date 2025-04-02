@@ -11,10 +11,16 @@ function Sidebar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/consoles">Consoles</Link>
+          <Link to="/consoles">Platform</Link>
         </li>
         <li>
           <Link to="/games">Games</Link>
+        </li>
+        <li>
+          <Link to="/creators">Creators</Link>
+        </li>
+        <li>
+          <Link to="/developers">Developers</Link>
         </li>
       </ul>
     </div>
