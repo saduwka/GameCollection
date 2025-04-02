@@ -1,13 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'https://api.rawg.io/api/games';
-
-export const getGameDetails = async (id) => {
+export const getGameDetails = async (gameId) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}`);
+    const response = await axios.get(
+      `https://api.rawg.io/api/games/${gameId}?key=97d7d537cfa34027be12ab4dfea87d96`
+    );
+    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error('Error fetching game details:', error);
-    return null;
+    console.error("Error fetching game details:", error);
+    throw error;
   }
 };

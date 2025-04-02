@@ -1,12 +1,15 @@
-// src/components/ConsoleCard/ConsoleCard.jsx
-import React from 'react';
-import './ConsoleCard.module.css';
+import React from "react";
+import styles from "./ConsoleCard.module.css";
 
 function ConsoleCard({ console }) {
   return (
-    <div className="console-card">
+    <div className={styles.consoleCard}>
       <h3>{console.name}</h3>
-      <img src={console.imageUrl} alt={console.name} />
+      <img
+        src={console.image_background}
+        alt={console.name}
+        className={styles.consoleCardImg}
+      />
     </div>
   );
 }

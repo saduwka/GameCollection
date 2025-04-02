@@ -1,0 +1,14 @@
+/* src/styles/HomePage.module.css */
+.homePage {
+  padding-left: 220px; /* Отступ, чтобы контент не накладывался на сайдбар */
+  padding-top: 20px; /* Можно добавить отступ сверху */
+  padding-right: 20px;
+}
+
+.homePage h1 {
+  font-size: 2rem;
+}
+
+.homePage p {
+  font-size: 1.2rem;
+}

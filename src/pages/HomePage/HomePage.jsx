@@ -1,31 +1,12 @@
 // src/pages/HomePage/HomePage.jsx
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getConsoles } from '../../services/consolesServices';
-import ConsoleCard from '../../components/ConsoleCard/ConsoleCard';
+import React from "react";
+import styles from "./HomePage.module.css";
 
 function HomePage() {
-  const [consoles, setConsoles] = useState([]);
-
-  useEffect(() => {
-    const fetchConsoles = async () => {
-      const data = await getConsoles();
-      setConsoles(data);
-    };
-
-    fetchConsoles();
-  }, []);
-
   return (
-    <div className="home-page">
-      <h1>Welcome to Retro Gaming Collection</h1>
-      <div className="console-list">
-        {consoles.map((console) => (
-          <Link key={console.id} to={`/console/${console.id}`}>
-            <ConsoleCard console={console} />
-          </Link>
-        ))}
-      </div>
+    <div className={styles.homePage}>
+      <h1>Welcome to Gaming Collection</h1>
+      <p>Explore and track your favorite games and consoles!</p>
     </div>
   );
 }

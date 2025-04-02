@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getGameDetails } from '../../services/gamesService'; // Сервис для получения данных об игре
+// src/pages/GamePage/GamePage.jsx
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getGameDetails } from "../../services/gamesServices";
+import styles from "./GamePage.module.css";
 
 function GamePage() {
   const { id } = useParams();
@@ -15,13 +17,52 @@ function GamePage() {
     fetchGameDetails();
   }, [id]);
 
-  if (!gameDetails) return <div>Loading...</div>;
+  if (!gameDetails) return <div className={styles.loading}>Loading...</div>;
 
   return (
-    <div className="game-page">
-      <h1>{gameDetails.name}</h1>
-      <img src={gameDetails.imageUrl} alt={gameDetails.name} />
-      <p>{gameDetails.description}</p>
+    <div className={styles.gamePageContainer}>
+      <h1 className={styles.gamePageHeader}>{gameDetails.name}</h1>
+      <div className={styles.gamePageImageContainer}>
+        <img
+          className={styles.gamePageImage}
+          src={gameDetails.background_image || gameDetails.image_background}
+          alt={gameDetails.name}
+        />
+      </div>
+      <div className={styles.gamePageDetails}>
+        <p>
+          <strong>Release Date:</strong> {gameDetails.released}
+        </p>
+        <p>
+          <strong>Rating:</strong> {gameDetails.rating}
+        </p>
+        <p>
+          <strong>Metacritic:</strong> {gameDetails.metacritic || "N/A"}
+        </p>
+        <p>
+          <strong>Description:</strong> {gameDetails.description_raw}
+        </p>
+        <p>
+          <strong>Platforms:</strong>
+          {gameDetails.platforms
+            ? gameDetails.platforms
+                .map((platform) => platform.platform.name)
+                .join(", ")
+            : "N/A"}
+        </p>
+        {gameDetails.website && (
+          <p>
+            <strong>Website:</strong>
+            <a
+              href={gameDetails.website}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit Website
+            </a>
+          </p>
+        )}
+      </div>
     </div>
   );
 }
