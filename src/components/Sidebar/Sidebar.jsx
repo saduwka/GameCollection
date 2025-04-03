@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Sidebar.module.css";
+import GamapadLogo from "../../assets/logo/Gamepad.svg";
 
 function Sidebar() {
   return (
     <div className={styles.sidebar}>
+      {/* <img src={GamapadLogo} alt="logo" /> */}
       <h3>Logo</h3>
       <ul>
         <li>

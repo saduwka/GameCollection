@@ -19,14 +19,51 @@
 .banner {
   text-align: center;
   margin: 20px auto;
-  max-width: 800px;
+  max-width: 100%;
+  width: 800px;
+  height: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Увеличенная тень для эффекта монитора */
+  overflow: hidden;
+  border: 20px solid #000; /* Утолщенная рамка */
+  background-color: #000; /* Черный фон для экрана */
+  border-radius: 15px; /* Закругленные углы */
+  position: relative; /* Для работы с псевдоэлементами */
 }
 
 .bannerImage {
   width: 100%;
-  max-width: 800px;
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  height: 100%;
+  object-fit: cover; /* Заполнение изображения */
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Элементы для имитации монитора */
+.banner:before {
+  content: "";
+  position: absolute;
+  top: -5px; /* Небольшой отступ от верхней грани */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 15px;
+  background-color: #444; /* Темно-серый цвет для верхней полосы */
+  border-radius: 8px;
+  z-index: 0;
+}
+
+.banner:after {
+  content: "";
+  position: absolute;
+  bottom: -5px; /* Небольшой отступ от нижней грани */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 10px;
+  background-color: #444; /* Темно-серый цвет для нижней полосы */
+  border-radius: 8px;
+  z-index: 0;
 }
 
 .tablesWrapper {
@@ -36,7 +73,7 @@
 }
 
 .popularGames,
-.popularPlatforms{
+.popularPlatforms {
   margin-top: 50px;
   display: flex;
   flex-direction: column;
@@ -46,7 +83,7 @@
 }
 
 .popularGames h2,
-.popularPlatforms h2{
+.popularPlatforms h2 {
   font-size: 1.5rem;
   text-align: center;
   color: #fff;

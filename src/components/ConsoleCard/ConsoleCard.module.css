@@ -1,22 +1,116 @@
 .consoleCard {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  text-align: center;
-  padding: 10px;
-  transition: transform 0.3s ease;
-  width: 300px;
+  background-color: #a9a9a9; /* Светло-серый для корпуса Game Boy */
+  width: 280px;
+  height: 380px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.screenContainer {
+  background-color: #333;
+  width: 90%;
+  height: 50%;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .consoleCardImg {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 8px;
+  border: #333 solid 10px;
 }
 
-.consoleCard h3 {
-  font-size: 1.2rem;
-  margin-top: 10px;
+.buttons {
+  position: absolute;
+  bottom: 10px; /* Уменьшено расстояние снизу */
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0 30px;
+  align-items: center; /* Центрируем кнопки по вертикали */
+  margin-bottom: 50px;
+}
+
+.dPad {
+  width: 50px;
+  height: 50px;
+  background-color: #333;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid #fff;
+}
+
+.dPad:before,
+.dPad:after {
+  content: "";
+  position: absolute;
+  background-color: #fff;
+}
+
+.dPad:before {
+  width: 10px;
+  height: 30px;
+}
+
+.dPad:after {
+  width: 30px;
+  height: 10px;
+}
+
+.dPad.up {
+  top: 5px;
+}
+
+.dPad.down {
+  bottom: 5px;
+}
+
+.dPad.left {
+  left: 5px;
+}
+
+.dPad.right {
+  right: 5px;
+}
+
+.buttonsAB {
+  display: flex;
+  gap: 10px;
+  align-items: center; /* Центрируем кнопки A/B */
+}
+
+.buttonA,
+.buttonB {
+  width: 35px;
+  height: 35px;
+  background-color: #ff4d4d; /* Красный для кнопок A/B */
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.buttonA,
+.buttonB {
+  margin-top: 0; /* Убираем верхний отступ, чтобы кнопки ближе были друг к другу */
 }

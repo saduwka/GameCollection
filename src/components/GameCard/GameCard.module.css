@@ -1,36 +1,70 @@
-.gamesPage {
-  padding: 20px;
-}
-
-.gamesList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-evenly; /* Чтобы карточки равномерно распределялись по экрану */
-}
-
 .gameCard {
-  width: 300px;
-  height: 400px; /* Фиксированная высота для карточки */
-  text-align: center;
-  background-color: #f5f5f5;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #d3d3d3; /* Серый фон для картриджа */
+  width: 220px;
+  height: 350px;
+  border-radius: 10px;
+  padding: 15px;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Располагаем контент внутри карточки */
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 3px solid #333; /* Граница картриджа */
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+  text-align: center;
 }
 
-.gameCard img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
+.gameCard:hover {
+  transform: scale(1.05); /* Увеличение карточки при наведении */
 }
 
-.gameCard h3 {
+h3 {
+  font-size: 1.2rem;
+  color: #333;
   margin-top: 10px;
-  font-size: 18px;
-  flex-shrink: 0; /* Чтобы заголовок не сжимался */
+  margin-bottom: 10px;
+  font-family: "Courier New", Courier, monospace; /* Шрифт, как на старых картриджах */
+}
+
+.gameCardImg {
+  width: 80%;
+  height: 60%;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.gameCardRating {
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.gameCard::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  height: 12px;
+  background-color: #333; /* Тёмная полоса сверху */
+  border-radius: 5px;
+}
+
+.gameCard::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 10px;
+  background-color: #333; /* Элемент снизу картриджа */
+  border-radius: 5px;
 }

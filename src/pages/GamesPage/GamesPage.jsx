@@ -6,10 +6,10 @@ import styles from "./GamesPage.module.css";
 
 function GamesPage() {
   const [games, setGames] = useState([]);
-  const [filter, setFilter] = useState("random"); 
+  const [filter, setFilter] = useState("random");
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1); 
-  const [nextPageUrl, setNextPageUrl] = useState(null); 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [nextPageUrl, setNextPageUrl] = useState(null);
 
   const shuffleArray = (array) => {
     return [...array].sort(() => Math.random() - 0.5);

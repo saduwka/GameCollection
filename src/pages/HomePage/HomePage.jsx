@@ -53,6 +53,7 @@ function HomePage() {
           />
         </div>
       )}
+
       <div className={styles.tablesWrapper}>
         <div className={styles.popularGames}>
           <h2>Popular Games</h2>
@@ -85,6 +86,7 @@ function HomePage() {
             </tbody>
           </table>
         </div>
+
         <div className={styles.popularPlatforms}>
           <h2>Popular Platforms</h2>
           <table className={styles.gameTable}>
