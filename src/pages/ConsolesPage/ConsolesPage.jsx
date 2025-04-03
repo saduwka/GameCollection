@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getConsoles } from "../../services/consolesServices";
-import Sidebar from "../../components/Sidebar/Sidebar";
 import ConsoleCard from "../../components/ConsoleCard/ConsoleCard";
 import styles from "./ConsolesPage.module.css";
 
@@ -20,7 +19,6 @@ function ConsolesPage() {
 
   return (
     <div className={styles.consolesPage}>
-      <Sidebar />
       <div className={styles.content}>
         <h1>Gaming Platforms</h1>
         <div className={styles.consoleList}>

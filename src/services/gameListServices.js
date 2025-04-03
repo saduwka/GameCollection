@@ -1,23 +1,23 @@
-// src/services/gameListServices.js
-export const fetchGames = async (url) => {
+// В file: gameListServices.js
+export const fetchGames = async (page = 1) => {
   try {
     const response = await fetch(
-      url ||
-        `https://api.rawg.io/api/games?key=97d7d537cfa34027be12ab4dfea87d96`
+      `https://api.rawg.io/api/games?key=97d7d537cfa34027be12ab4dfea87d96&page=${page}`
     );
 
+    // Проверка на успешный ответ
     if (!response.ok) {
-      throw new Error("Failed to fetch games");
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
     return {
       games: data.results,
-      nextPage: data.next,
-      prevPage: data.previous
+      nextPageUrl: data.next,
+      prevPageUrl: data.previous
     };
   } catch (error) {
     console.error("Error fetching games:", error);
-    return { games: [], nextPage: null, prevPage: null }; // Возвращаем пустые данные в случае ошибки
+    return { games: [], nextPageUrl: null, prevPageUrl: null }; // Возвращаем пустые данные в случае ошибки
   }
 };

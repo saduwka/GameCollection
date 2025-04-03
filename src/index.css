@@ -23,11 +23,10 @@ a:hover {
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Pixelated', 'Press Start 2P', cursive; 
+  background: linear-gradient(140deg, #333,#333, #333, #333, #333, #333, #333, #333,#003300,#004d00 );
+  color: #fff;
+  background-attachment: fixed;
 }
 
 h1 {
@@ -51,18 +50,18 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto #fff;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #616161;
   }
   a:hover {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #4a4a4a;
   }
 }

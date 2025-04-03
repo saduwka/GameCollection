@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCreatorsDetails } from "../../services/creatorsServices";
-import Sidebar from "../../components/Sidebar/Sidebar";
 import styles from "./CreatorsPage.module.css";
 import CreatorCard from "../../components/CreatorCard/CreatorCard";
 
@@ -20,7 +19,6 @@ function CreatorsPage() {
 
   return (
     <div className={styles.creatorsPage}>
-      <Sidebar />
       <div className={styles.content}>
         <h1>Creators</h1>
         <div className={styles.creatorsList}>

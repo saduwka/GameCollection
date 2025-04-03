@@ -2,27 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchGames } from "../../services/gameListServices";
 import GameCard from "../../components/GameCard/GameCard";
-import Sidebar from "../../components/Sidebar/Sidebar";
 import styles from "./GamesPage.module.css";
 
 function GamesPage() {
   const [games, setGames] = useState([]);
-  const [filter, setFilter] = useState("random"); // "random", "popular", "rating"
+  const [filter, setFilter] = useState("random"); 
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1); // Текущая страница
-  const [nextPageUrl, setNextPageUrl] = useState(null); // URL следующей страницы
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [nextPageUrl, setNextPageUrl] = useState(null); 
 
-  // Функция перемешивания массива
   const shuffleArray = (array) => {
     return [...array].sort(() => Math.random() - 0.5);
   };
 
-  // Функция сортировки по популярности (по количеству добавлений)
   const sortByPopularity = (array) => {
     return [...array].sort((a, b) => b.added - a.added);
   };
 
-  // Функция сортировки по рейтингу
   const sortByRating = (array) => {
     return [...array].sort((a, b) => b.rating - a.rating);
   };
@@ -30,7 +26,7 @@ function GamesPage() {
   useEffect(() => {
     const getGames = async () => {
       setLoading(true);
-      const gamesData = await fetchGames(); // Берем `games` из `fetchGames()`
+      const gamesData = await fetchGames(currentPage); // Передаем currentPage
       let sortedGames = gamesData.games; // gamesData.games – массив игр
 
       if (filter === "popular") {
@@ -42,29 +38,17 @@ function GamesPage() {
       }
 
       setGames(sortedGames);
+      setNextPageUrl(gamesData.nextPageUrl); // Предполагаем, что nextPageUrl приходит из ответа
       setLoading(false);
     };
 
     getGames();
-  }, [filter]); // Обновляем список при изменении фильтра
+  }, [filter, currentPage]); // Добавляем currentPage в зависимости
 
   return (
     <div className={styles.gamesPage}>
-      <Sidebar />
       <div className={styles.content}>
         <h1>Games List</h1>
-        <div className={styles.pagination}>
-          {currentPage > 1 && (
-            <button onClick={() => setCurrentPage(currentPage - 1)}>
-              Previous
-            </button>
-          )}
-          {nextPageUrl && (
-            <button onClick={() => setCurrentPage(currentPage + 1)}>
-              Next
-            </button>
-          )}
-        </div>
         <div className={styles.filters}>
           <button onClick={() => setFilter("random")}>Random</button>
           <button onClick={() => setFilter("popular")}>Popular</button>
@@ -84,6 +68,19 @@ function GamesPage() {
             ))}
           </div>
         )}
+        <div className={styles.pagination}>
+          {currentPage > 1 && (
+            <button onClick={() => setCurrentPage(currentPage - 1)}>
+              Previous
+            </button>
+          )}
+          <span className={styles.pageNumber}>{currentPage}</span>
+          {nextPageUrl && (
+            <button onClick={() => setCurrentPage(currentPage + 1)}>
+              Next
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

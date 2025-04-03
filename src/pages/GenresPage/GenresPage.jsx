@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getGenres } from "../../services/genreServices";
-import Sidebar from "../../components/Sidebar/Sidebar";
 import styles from "./GenresPage.module.css";
 import GenreCard from "../../components/GenreCard/GenreCard";
 
@@ -19,7 +18,6 @@ function GenresPage() {
 
   return (
     <div className={styles.genresPage}>
-      <Sidebar />
       <div className={styles.content}>
         <h1>Genres</h1>
         <div className={styles.genresList}>

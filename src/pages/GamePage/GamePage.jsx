@@ -1,4 +1,3 @@
-// src/pages/GamePage/GamePage.jsx
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getGameDetails } from "../../services/gamesServices";

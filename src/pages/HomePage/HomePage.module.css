@@ -1,8 +1,10 @@
-/* src/styles/HomePage.module.css */
 .homePage {
-  padding-left: 220px; /* Отступ, чтобы контент не накладывался на сайдбар */
-  padding-top: 20px; /* Можно добавить отступ сверху */
+  padding-left: 220px;
+  padding-top: 20px;
   padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .homePage h1 {
@@ -11,4 +13,66 @@
 
 .homePage p {
   font-size: 1.2rem;
+  color: #fff;
+}
+
+.banner {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.bannerImage {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tablesWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.popularGames,
+.popularPlatforms{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #616161;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.popularGames h2,
+.popularPlatforms h2{
+  font-size: 1.5rem;
+  text-align: center;
+  color: #fff;
+}
+
+.gameTable {
+  width: 500px;
+  border-collapse: collapse;
+}
+
+.gameTable th,
+.gameTable td {
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.gameTable tr:hover {
+  background-color: #333;
+  cursor: pointer;
+}
+
+.gameThumbnail {
+  height: 45px;
+  width: 80px;
+  border-radius: 10px;
+  object-fit: cover;
 }
