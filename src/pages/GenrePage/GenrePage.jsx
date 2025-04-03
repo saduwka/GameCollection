@@ -1,47 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
-  getDeveloperDetails,
-  getGamesForDeveloper
-} from "../../services/developersServices";
-import styles from "./DeveloperPage.module.css";
+  getGenresDetails,
+  getGamesForGenre
+} from "../../services/genreServices";
+import styles from "./GenrePage.module.css";
 
-const DeveloperPage = () => {
+const GenrePage = () => {
   const { id } = useParams();
-  const [developerDetails, setDeveloperDetails] = useState(null);
+  const [genreDetails, setGenreDetails] = useState(null);
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDeveloperDetails = async () => {
+    const fetchGenreDetails = async () => {
       try {
         setLoading(true);
-        const details = await getDeveloperDetails(id);
-        setDeveloperDetails(details);
-        const developerGames = await getGamesForDeveloper(id);
-        setGames(developerGames);
+        const details = await getGenresDetails(id);
+        setGenreDetails(details);
+        const genreGames = await getGamesForGenre(id);
+        setGames(genreGames);
         setLoading(false);
       } catch (error) {
         console.error(error);
         setLoading(false);
       }
     };
-    fetchDeveloperDetails();
+    fetchGenreDetails();
   }, [id]);
 
   if (loading) {
     return <div className={styles.loading}>Loading...</div>;
   }
 
-  if (!developerDetails) {
-    return <div className={styles.error}>Developers not found</div>;
+  if (!genreDetails) {
+    return <div className={styles.error}>Genres not found</div>;
   }
 
   return (
-    <div className={styles.developerPage}>
-      <h1>{developerDetails.name}</h1>
-      <p>{developerDetails.description}</p>
-      <h2>Games by {developerDetails.name}</h2>
+    <div className={styles.genrePage}>
+      <h1>{genreDetails.name}</h1>
+      <p>{genreDetails.description}</p>
+      <h2>Games on {genreDetails.name}</h2>
       <div className={styles.gameList}>
         {games.map((game) => (
           <Link
@@ -65,4 +65,4 @@ const DeveloperPage = () => {
   );
 };
 
-export default DeveloperPage;
+export default GenrePage;

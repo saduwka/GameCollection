@@ -7,57 +7,83 @@ import styles from "./GamesPage.module.css";
 
 function GamesPage() {
   const [games, setGames] = useState([]);
-  const [filter, setFilter] = useState("random"); // фильтр: "random", "popular" или "rating"
+  const [filter, setFilter] = useState("random"); // "random", "popular", "rating"
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // Текущая страница
+  const [nextPageUrl, setNextPageUrl] = useState(null); // URL следующей страницы
 
   // Функция перемешивания массива
   const shuffleArray = (array) => {
-    return array.sort(() => Math.random() - 0.5);
+    return [...array].sort(() => Math.random() - 0.5);
   };
 
-  // Функция сортировки по популярности (предполагаем, что у игры есть рейтинг или просмотры)
+  // Функция сортировки по популярности (по количеству добавлений)
   const sortByPopularity = (array) => {
-    return array.sort((a, b) => b.popularity - a.popularity); // сортировка по убыванию
+    return [...array].sort((a, b) => b.added - a.added);
   };
 
   // Функция сортировки по рейтингу
   const sortByRating = (array) => {
-    return array.sort((a, b) => b.rating - a.rating); // сортировка по убыванию рейтинга
+    return [...array].sort((a, b) => b.rating - a.rating);
   };
 
   useEffect(() => {
     const getGames = async () => {
-      const gamesData = await fetchGames();
+      setLoading(true);
+      const gamesData = await fetchGames(); // Берем `games` из `fetchGames()`
+      let sortedGames = gamesData.games; // gamesData.games – массив игр
+
       if (filter === "popular") {
-        setGames(sortByPopularity(gamesData));
+        sortedGames = sortByPopularity(sortedGames);
       } else if (filter === "rating") {
-        setGames(sortByRating(gamesData));
+        sortedGames = sortByRating(sortedGames);
       } else {
-        setGames(shuffleArray(gamesData));
+        sortedGames = shuffleArray(sortedGames);
       }
+
+      setGames(sortedGames);
+      setLoading(false);
     };
 
     getGames();
-  }, [filter]); // следим за изменением фильтра
+  }, [filter]); // Обновляем список при изменении фильтра
 
   return (
     <div className={styles.gamesPage}>
       <Sidebar />
       <div className={styles.content}>
         <h1>Games List</h1>
+        <div className={styles.pagination}>
+          {currentPage > 1 && (
+            <button onClick={() => setCurrentPage(currentPage - 1)}>
+              Previous
+            </button>
+          )}
+          {nextPageUrl && (
+            <button onClick={() => setCurrentPage(currentPage + 1)}>
+              Next
+            </button>
+          )}
+        </div>
         <div className={styles.filters}>
           <button onClick={() => setFilter("random")}>Random</button>
           <button onClick={() => setFilter("popular")}>Popular</button>
           <button onClick={() => setFilter("rating")}>Rating</button>
         </div>
-        <div className={styles.gamesList}>
-          {games.map((game) => (
-            <div key={game.id} className={styles.gameCardContainer}>
-              <Link to={`/games/${game.id}`}>
-                <GameCard console={{ ...game, rating: game.rating }} />
-              </Link>
-            </div>
-          ))}
-        </div>
+
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className={styles.gamesList}>
+            {games.map((game) => (
+              <div key={game.id} className={styles.gameCardContainer}>
+                <Link to={`/games/${game.id}`}>
+                  <GameCard game={game} />
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

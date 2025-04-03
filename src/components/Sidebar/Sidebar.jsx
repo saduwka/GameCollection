@@ -5,7 +5,7 @@ import styles from "./Sidebar.module.css";
 function Sidebar() {
   return (
     <div className={styles.sidebar}>
-      <h3>Gaming Collection</h3>
+      <h3>Logo</h3>
       <ul>
         <li>
           <Link to="/">Home</Link>
@@ -17,10 +17,13 @@ function Sidebar() {
           <Link to="/games">Games</Link>
         </li>
         <li>
-          <Link to="/creators">Creators</Link>
+          <Link to="/developers">Developers</Link>
         </li>
         <li>
-          <Link to="/developers">Developers</Link>
+          <Link to="/genres">Genres</Link>
+        </li>
+        <li>
+          <Link to="/creators">Creators</Link>
         </li>
       </ul>
     </div>
