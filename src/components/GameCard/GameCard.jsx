@@ -8,12 +8,12 @@ export default function GameCard({ game }) {
 
   return (
     <div className={styles.gameCard}>
-      <h3>{game.name}</h3>
       <img
         src={game.background_image}
         alt={game.name}
         className={styles.gameCardImg}
       />
+      <h3>{game.name}</h3>
       <p className={styles.gameCardRating}>Рейтинг: {game.rating || "N/A"}</p>
     </div>
   );

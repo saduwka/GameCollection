@@ -11,27 +11,26 @@ import CreatorsPage from "./pages/CreatorsPage/CreatorsPage";
 import CreatorPage from "./pages/CreatorPage/CreatorPage";
 import DevelopersPage from "./pages/DevelopersPage/DevelopersPage";
 import DeveloperPage from "./pages/DeveloperPage/DeveloperPage";
-import Header from "./components/Header/Header"; // Импортируем компонент Header
 import GenresPage from "./pages/GenresPage/GenresPage";
 import GenrePage from "./pages/GenrePage/GenrePage";
+import SearchPage from "./pages/SearchPage/SearchPage"; 
 
 const PageRoutes = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Состояние для открытия/закрытия сайдбара
 
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    // Логика фильтрации игр или других элементов на основе запроса
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen); // Переключение состояния
   };
 
   return (
     <Router>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <Header onSearch={handleSearch} /> {/* Добавляем Header здесь */}
         <div style={{ display: "flex", marginTop: "60px" }}>
           {" "}
           {/* Отступ сверху для контента */}
-          <Sidebar />
-          <div style={{ marginLeft: "220px", padding: "20px", flex: 1 }}>
+          <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> {/* Передаем пропсы в Sidebar */}
+          <div style={{ marginLeft: isSidebarOpen ? "220px" : "0", padding: "20px", flex: 1 }}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/consoles" element={<ConsolesPage />} />
@@ -45,6 +44,7 @@ const PageRoutes = () => {
               <Route path="/genres" element={<GenresPage />} />
               <Route path="/genres/:id" element={<GenrePage />} />
               <Route path="*" element={<NotFoundPage />} />
+              <Route path="/search" element={<SearchPage />} />
             </Routes>
           </div>
         </div>

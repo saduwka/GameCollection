@@ -1,5 +1,5 @@
 .gameCard {
-  background-color: #d3d3d3; /* Серый фон для картриджа */
+  background-color: #d3d3d3;
   width: 220px;
   height: 350px;
   border-radius: 10px;
@@ -9,14 +9,15 @@
   flex-direction: column;
   align-items: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  border: 3px solid #333; /* Граница картриджа */
+  border: 3px solid #333;
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
   text-align: center;
+  justify-content: flex-start;
 }
 
 .gameCard:hover {
-  transform: scale(1.05); /* Увеличение карточки при наведении */
+  transform: scale(1.05);
 }
 
 h3 {
@@ -24,12 +25,13 @@ h3 {
   color: #333;
   margin-top: 10px;
   margin-bottom: 10px;
-  font-family: "Courier New", Courier, monospace; /* Шрифт, как на старых картриджах */
+  font-family: "Courier New", Courier, monospace;
+  word-wrap: break-word;
 }
 
 .gameCardImg {
-  width: 80%;
-  height: 60%;
+  width: 100%;
+  height: 180px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -44,27 +46,4 @@ h3 {
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.gameCard::before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  height: 12px;
-  background-color: #333; /* Тёмная полоса сверху */
-  border-radius: 5px;
-}
-
-.gameCard::after {
-  content: "";
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30px;
-  height: 10px;
-  background-color: #333; /* Элемент снизу картриджа */
-  border-radius: 5px;
 }

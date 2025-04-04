@@ -1,10 +1,9 @@
 .homePage {
-  padding-left: 220px;
-  padding-top: 20px;
-  padding-right: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
+  justify-content: center;
 }
 
 .homePage h1 {
@@ -66,50 +65,38 @@
   z-index: 0;
 }
 
-.tablesWrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-}
-
-.popularGames,
-.popularPlatforms {
-  margin-top: 50px;
+.searchForm {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background: #616161;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  gap: 20px;
 }
 
-.popularGames h2,
-.popularPlatforms h2 {
-  font-size: 1.5rem;
+.searchInput {
+  padding: 20px 12px;
+  font-size: 26px;
+  border: none;
+  border-radius: 20px;
+  width: 400px;
+  height: 100%;
+  background-color: #646464;
+  color: #fff;
+  font-family: 'Pixelated', 'Press Start 2P', cursive;
   text-align: center;
+}
+
+input::placeholder {
+  font-family: 'Pixelated', 'Press Start 2P', cursive;
+  font-size: 16px; 
+  color: #777; 
+}
+
+.searchInput::placeholder {
   color: #fff;
 }
 
-.gameTable {
-  width: 500px;
-  border-collapse: collapse;
-}
-
-.gameTable th,
-.gameTable td {
-  padding: 12px;
-  border: 1px solid transparent;
-  border-radius: 20px;
-  text-align: center;
-}
-
-.gameTable tr:hover {
-  background-color: #333;
-  cursor: pointer;
-}
-
-.gameThumbnail {
-  height: 45px;
-  width: 80px;
-  border-radius: 10px;
-  object-fit: cover;
+.searchInput:focus {
+  border: 2px solid var(--secondary-color);
 }

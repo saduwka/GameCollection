@@ -1,28 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import { fetchGames } from "../../services/gameListServices";
 import { getConsoles } from "../../services/consolesServices";
+import { SearchContext } from "../../contexts/SearchContext";
 
 function HomePage() {
   const [randomGame, setRandomGame] = useState(null);
-  const [popularGames, setPopularGames] = useState([]);
+  const [allGames, setAllGames] = useState([]);
   const [platforms, setPlatforms] = useState([]);
   const navigate = useNavigate();
+  const { searchQuery, setSearchQuery } = useContext(SearchContext);
+
+  const handleRandomGameClick = () => {
+    if (allGames.length > 0) {
+      const randomIndex = Math.floor(Math.random() * allGames.length);
+      setRandomGame(allGames[randomIndex]);
+    }
+  };
+
+  const handleSearchClick = () => {
+    if (searchQuery) {
+      navigate(`/search?query=${searchQuery}`);
+    }
+  };
 
   useEffect(() => {
     const getGames = async () => {
       const { games } = await fetchGames();
       if (games.length > 0) {
-        const randomIndex = Math.floor(Math.random() * games.length);
-        setRandomGame(games[randomIndex]);
-        setPopularGames(games.slice(0, 5)); // Берём топ-5 популярных игр
+        setAllGames(games);
       }
     };
 
     const getPlatforms = async () => {
       const consoles = await getConsoles();
-      setPlatforms(consoles.slice(0, 5)); // Берём топ-5 платформ
+      setPlatforms(consoles.slice(0, 5));
     };
 
     getGames();
@@ -38,7 +51,24 @@ function HomePage() {
   return (
     <div className={styles.homePage}>
       <h1>Welcome to Gaming Collection</h1>
-      <p>Explore and track your favorite games and consoles!</p>
+
+      <div className={styles.searchForm}>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Find your game..."
+          className={styles.searchInput}
+        />
+        <button onClick={handleSearchClick}>Start</button>
+      </div>
+
+      <button
+        onClick={handleRandomGameClick}
+        className={styles.randomGameButton}
+      >
+        Random Game
+      </button>
 
       {randomGame && (
         <div
@@ -53,66 +83,6 @@ function HomePage() {
           />
         </div>
       )}
-
-      <div className={styles.tablesWrapper}>
-        <div className={styles.popularGames}>
-          <h2>Popular Games</h2>
-          <table className={styles.gameTable}>
-            <thead>
-              <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Rating</th>
-              </tr>
-            </thead>
-            <tbody>
-              {popularGames.map((game) => (
-                <tr
-                  key={game.id}
-                  onClick={() => navigate(`/games/${game.id}`)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <td>
-                    <img
-                      src={game.background_image}
-                      alt={game.name}
-                      className={styles.gameThumbnail}
-                    />
-                  </td>
-                  <td>{game.name}</td>
-                  <td>{game.rating}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className={styles.popularPlatforms}>
-          <h2>Popular Platforms</h2>
-          <table className={styles.gameTable}>
-            <thead>
-              <tr>
-                <th>Image</th>
-                <th>Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {platforms.map((platform) => (
-                <tr key={platform.id} style={{ cursor: "pointer" }}>
-                  <td>
-                    <img
-                      src={platform.image_background}
-                      alt={platform.name}
-                      className={styles.gameThumbnail}
-                    />
-                  </td>
-                  <td>{platform.name}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   );
 }

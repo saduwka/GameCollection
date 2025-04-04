@@ -1,10 +1,10 @@
-.developersPage {
+.searchPage {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.developersList {
+.gameList {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
@@ -18,11 +18,4 @@
   flex-direction: column;
   padding: 20px;
   flex: 1;
-}
-
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  margin-left: 20px; 
-  color: #fff;
 }

@@ -17,22 +17,31 @@ a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
+  transition: color 0.25s ease-in-out;
 }
 a:hover {
   color: #535bf2;
 }
 
 body {
-  font-family: 'Pixelated', 'Press Start 2P', cursive; 
-  background: linear-gradient(140deg, #333,#333, #333, #333, #333, #333, #333, #333,#003300,#004d00 );
+  font-family: 'Pixelated', 'Press Start 2P', cursive;
+  background: linear-gradient(135deg, #333, #004d00, #003300, #1a1a1a, #008000, #1a1a1a, #003300, #004d00, #333);
   color: #fff;
   background-attachment: fixed;
+  background-size: 200% 200%; /* Размер градиента уменьшен для бесшовности */
+  animation: gradientAnimation 30s linear infinite; /* Анимация с длительностью 30 секунд */
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out; /* Плавные переходы фона и текста */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
+
 
 button {
   border-radius: 8px;

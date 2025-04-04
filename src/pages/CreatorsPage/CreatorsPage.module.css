@@ -1,6 +1,7 @@
 .creatorsPage {
   display: flex;
-  padding: 20px;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .creatorsList {
@@ -20,7 +21,8 @@
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 24px;
   margin-bottom: 20px;
-  margin-left: 20px; /* Добавляет отступ слева для заголовка */
+  margin-left: 20px; 
+  color: #fff;
 }
