@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const API_URL = "https://api.rawg.io/api/genres";
-const apiKey = "97d7d537cfa34027be12ab4dfea87d96";
+const API_KEY = import.meta.env.VITE_API_KEY; 
 
 export const getGenres = async () => {
   try {
-    const response = await axios.get(`${API_URL}?key=${apiKey}`);
+    const response = await axios.get(`${API_URL}?key=${API_KEY}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching genre details:", error);
@@ -13,10 +13,10 @@ export const getGenres = async () => {
   }
 };
 
-export const getGamesForGenre = async (id) => {
+export const getGamesForGenre = async (id, page = 1) => {
   try {
     const response = await axios.get(
-      `https://api.rawg.io/api/games?genres=${id}&key=${apiKey}`
+      `https://api.rawg.io/api/games?genres=${id}&page=${page}&key=${API_KEY}`
     );
     return response.data.results;
   } catch (error) {
@@ -27,10 +27,10 @@ export const getGamesForGenre = async (id) => {
 
 export const getGenresDetails = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}?key=${apiKey}`); // Используем id из аргумента
-    return response.data; // Возвращаем данные консоли
+    const response = await axios.get(`${API_URL}/${id}?key=${API_KEY}`); 
+    return response.data; 
   } catch (error) {
     console.error("Error fetching genre details:", error);
-    throw new Error("Genre not found"); // Бросаем ошибку, если консоль не найдена
+    throw new Error("Genre not found"); 
   }
 };

@@ -1,35 +1,33 @@
-import React, { useContext } from "react";
-import { SearchContext } from "../../contexts/SearchContext"; // Импортируем контекст для получения фильтрованных игр
+import React, { useContext } from "react";  
+import { SearchContext } from "../../contexts/SearchContext";
 import styles from "./GameList.module.css";
+import LoadingErrorMessage from "../LoadingErrorMessage/LoadingErrorMessage"; 
 
-
-const GameList = () => {
-  const { filteredGames, loading, error } = useContext(SearchContext); // Извлекаем необходимые данные из контекста
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p style={{ color: "red" }}>Error: {error}</p>;
-  }
-
-  if (filteredGames.length === 0) {
-    return <p>Not found.</p>;
-  }
+const GameList = ({ onGameClick }) => {  
+  const { filteredGames, loading, error } = useContext(SearchContext); 
 
   return (
     <div className={styles.gameList}>
-      {filteredGames.map((game) => (
-        <div className={styles.gameCard}>
-        <img
-          src={game.background_image}
-          alt={game.name}
-          className={styles.gameCardImg}
-        />
-        <h3>{game.name}</h3>
-        <p className={styles.gameCardRating}>Рейтинг: {game.rating || "N/A"}</p>
-      </div>
+      <LoadingErrorMessage 
+        loading={loading} 
+        error={error} 
+        noResults={filteredGames.length === 0} 
+      />
+
+      {filteredGames.map((game, index) => (
+        <div 
+          key={game.id || index} 
+          className={styles.gameCard} 
+          onClick={() => onGameClick(game.id)}
+        >
+          <img
+            src={game.background_image}
+            alt={game.name}
+            className={styles.gameCardImg}
+          />
+          <h3>{game.name}</h3>
+          <p className={styles.gameCardRating}>Рейтинг: {game.rating || "N/A"}</p>
+        </div>
       ))}
     </div>
   );

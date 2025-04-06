@@ -38,16 +38,29 @@ function GamePage() {
         <p>
           <strong>Metacritic:</strong> {gameDetails.metacritic || "N/A"}
         </p>
+        <div>
+          <strong>Description:</strong>
+          <div
+            dangerouslySetInnerHTML={{ __html: gameDetails.description }}
+          />
+        </div>
         <p>
-          <strong>Description:</strong> {gameDetails.description_raw}
-        </p>
-        <p>
-          <strong>Platforms:</strong>
-          {gameDetails.platforms
-            ? gameDetails.platforms
-                .map((platform) => platform.platform.name)
-                .join(", ")
-            : "N/A"}
+          <strong>Platforms:</strong>{" "}
+          {gameDetails.platforms && gameDetails.platforms.length > 0 ? (
+            gameDetails.platforms.map((platformObj, index) => {
+              const platformName = platformObj.platform.name;
+              return (
+                <span key={platformName}>
+                  <a href={`/consoles/${platformObj.platform.id}`} className={styles.platformLink}>
+                    {platformName}
+                  </a>
+                  {index < gameDetails.platforms.length - 1 && ", "}
+                </span>
+              );
+            })
+          ) : (
+            "N/A"
+          )}
         </p>
         {gameDetails.website && (
           <p>

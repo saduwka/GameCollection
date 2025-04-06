@@ -1,9 +1,12 @@
 import axios from "axios";
 
+const API_URL = "https://api.rawg.io/api/games";
+const API_KEY = import.meta.env.VITE_API_KEY;
+
 export const getGameDetails = async (gameId) => {
   try {
     const response = await axios.get(
-      `https://api.rawg.io/api/games/${gameId}?key=97d7d537cfa34027be12ab4dfea87d96`
+      `${API_URL}/${gameId}?key=${API_KEY}`
     );
     console.log(response.data);
     return response.data;

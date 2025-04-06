@@ -2,15 +2,15 @@
   display: flex;
   flex-direction: column;
   padding: 0 200px;
-  background-color: #f4f4f4;
   flex: 1;
 }
 
 .gamePageHeader {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #000;
+  color: #fff;
   font-weight: bold;
+  text-align: center;
 }
 
 .gamePageImageContainer {
@@ -33,7 +33,7 @@
 }
 
 .gamePageDetails p {
-  font-size: 1rem;
+  font-size: 20px;
   margin: 10px 0;
   color: #555;
 }
@@ -49,6 +49,22 @@
 }
 
 .gamePageDetails a:hover {
+  text-decoration: underline;
+}
+
+.platforms {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.platformLink {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.platformLink:hover {
   text-decoration: underline;
 }
 

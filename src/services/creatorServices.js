@@ -1,25 +1,24 @@
-// src/services/consoleServices.js
 import axios from "axios";
 
 const API_URL = "https://api.rawg.io/api/creators";
-const apiKey = "97d7d537cfa34027be12ab4dfea87d96";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 export const getCreatorDetails = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}?key=${apiKey}`); // Используем id из аргумента
-    return response.data; // Возвращаем данные консоли
+    const response = await axios.get(`${API_URL}/${id}?key=${API_KEY}`);
+    return response.data;
   } catch (error) {
     console.error("Error fetching console details:", error);
-    throw new Error("Console not found"); // Бросаем ошибку, если консоль не найдена
+    throw new Error("Console not found");
   }
 };
 
 export const getGamesForCreator = async (id) => {
   try {
     const response = await axios.get(
-      `https://api.rawg.io/api/games?creators=${id}&key=${apiKey}`
-    ); // Запрос игр для консоли по ID
-    return response.data.results; // Возвращаем список игр
+      `https://api.rawg.io/api/games?creators=${id}&key=${API_KEY}`
+    );
+    return response.data.results;
   } catch (error) {
     console.error("Error fetching games for console:", error);
     throw new Error("Games not found");

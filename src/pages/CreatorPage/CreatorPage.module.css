@@ -29,7 +29,7 @@
   }
   
   .gameCardLink {
-    text-decoration: none; /* Убираем подчеркивание */
+    text-decoration: none;
   }
   
   .gameCard {
@@ -64,7 +64,7 @@
   .error {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #f44336;
+    color: #fff;
     text-align: center;
     margin-top: 20px;
   }

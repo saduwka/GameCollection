@@ -1,45 +1,50 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { SearchContext } from "../../contexts/SearchContext";
 import GameList from "../../components/GameList/GameList";
 import styles from "./SearchPage.module.css";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import LoadingErrorMessage from "../../components/LoadingErrorMessage/LoadingErrorMessage";  // Новый компонент
 
 const SearchPage = () => {
-  const { searchQuery: initialSearchQuery, setSearchQuery, filteredGames, loading, error } =
-    useContext(SearchContext);
+  const {
+    searchQuery,
+    setSearchQuery,
+    filteredGames,
+    loading,
+    error
+  } = useContext(SearchContext);
 
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const urlSearchQuery = params.get("query");
+  const navigate = useNavigate();
 
-  const [searchQuery, setSearchInput] = useState(urlSearchQuery || initialSearchQuery);
-
-  useEffect(() => {
-    setSearchQuery(searchQuery);
-  }, [searchQuery, setSearchQuery]);
-
-  useEffect(() => {
-    setSearchInput(urlSearchQuery || initialSearchQuery);
-  }, [urlSearchQuery, initialSearchQuery]);
+  const handleGameClick = (gameId) => {
+    navigate(`/games/${gameId}`);
+  };
 
   return (
     <div className={styles.searchPage}>
       <div className={styles.content}>
         <h1>Results</h1>
 
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchInput(e.target.value)} 
-          placeholder="Search for games..."
-        />
+        <div className={styles.searchForm}>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search for games..."
+            className={styles.searchInput}
+          />
+        </div>
 
-        {loading && <p>Loading...</p>}
-        {error && <p style={{ color: "red" }}>Error: {error}</p>}
-        {searchQuery && filteredGames.length > 0 ? (
-          <GameList games={filteredGames} />
-        ) : (
-          <p>No results found for your query.</p>
+        <LoadingErrorMessage 
+          loading={loading} 
+          error={error} 
+          noResults={!searchQuery || filteredGames.length === 0} 
+        />
+        
+        {searchQuery && filteredGames.length > 0 && (
+          <GameList 
+            onGameClick={handleGameClick}  // Передаем функцию клика
+          />
         )}
       </div>
     </div>

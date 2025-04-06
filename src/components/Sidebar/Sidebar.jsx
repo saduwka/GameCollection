@@ -9,7 +9,6 @@ function Sidebar({ isOpen, toggleSidebar }) {
         ☰
       </div>
       <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
-        <h3>Logo</h3>
         <ul>
           <li>
             <Link to="/">Home</Link>

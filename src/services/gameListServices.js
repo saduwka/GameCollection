@@ -1,11 +1,13 @@
-// В file: gameListServices.js
+
+const API_URL = "https://api.rawg.io/api/games";
+const API_KEY = import.meta.env.VITE_API_KEY;
+
 export const fetchGames = async (page = 1) => {
   try {
     const response = await fetch(
-      `https://api.rawg.io/api/games?key=97d7d537cfa34027be12ab4dfea87d96&page=${page}`
+      `${API_URL}?key=${API_KEY}&page=${page}`
     );
 
-    // Проверка на успешный ответ
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -18,6 +20,6 @@ export const fetchGames = async (page = 1) => {
     };
   } catch (error) {
     console.error("Error fetching games:", error);
-    return { games: [], nextPageUrl: null, prevPageUrl: null }; // Возвращаем пустые данные в случае ошибки
+    return { games: [], nextPageUrl: null, prevPageUrl: null }; 
   }
 };

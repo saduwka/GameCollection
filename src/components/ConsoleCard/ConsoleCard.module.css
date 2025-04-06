@@ -1,5 +1,5 @@
 .consoleCard {
-  background-color: #a9a9a9; /* Светло-серый для корпуса Game Boy */
+  background-color: #a9a9a9; 
   width: 280px;
   height: 380px;
   border-radius: 15px;
@@ -40,12 +40,12 @@ h3 {
 
 .buttons {
   position: absolute;
-  bottom: 10px; /* Уменьшено расстояние снизу */
+  bottom: 10px; 
   display: flex;
   justify-content: space-around;
   width: 100%;
   padding: 0 30px;
-  align-items: center; /* Центрируем кнопки по вертикали */
+  align-items: center; 
   margin-bottom: 50px;
 }
 
@@ -97,14 +97,14 @@ h3 {
 .buttonsAB {
   display: flex;
   gap: 10px;
-  align-items: center; /* Центрируем кнопки A/B */
+  align-items: center; 
 }
 
 .buttonA,
 .buttonB {
   width: 35px;
   height: 35px;
-  background-color: #ff4d4d; /* Красный для кнопок A/B */
+  background-color: #ff4d4d; 
   border-radius: 50%;
   border: 2px solid #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
@@ -112,5 +112,5 @@ h3 {
 
 .buttonA,
 .buttonB {
-  margin-top: 0; /* Убираем верхний отступ, чтобы кнопки ближе были друг к другу */
+  margin-top: 0; 
 }

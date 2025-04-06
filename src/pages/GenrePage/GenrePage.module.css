@@ -1,6 +1,5 @@
 .genrePage {
   padding: 20px;
-  margin-left: 220px;
 }
 
 h1 {
@@ -8,14 +7,27 @@ h1 {
   font-weight: bold;
 }
 
-h2 {
+.heading {
   margin-top: 20px;
-  font-size: 1.5rem;
-  color: #444;
+  font-size: 1.2rem;
+  color: #FFF;
+  text-align: center;
+  font-family: 'Pixelated', 'Press Start 2P', cursive;
+}
+
+.description {
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.5;
+  background-color: #646464;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 p {
-  color: #666;
+  color: #fff;
   font-size: 1rem;
   line-height: 1.5;
   margin-top: 10px;
@@ -29,7 +41,7 @@ p {
 }
 
 .gameCardLink {
-  text-decoration: none; /* Убираем подчеркивание */
+  text-decoration: none;
 }
 
 .gameCard {
@@ -39,6 +51,7 @@ p {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   text-align: center;
+  height: 300px;
 }
 
 .gameCard:hover {
@@ -50,6 +63,7 @@ p {
   font-size: 1.2rem;
   font-weight: 600;
   margin-top: 10px;
+  color: #333;
 }
 
 .gameImage {
@@ -64,7 +78,27 @@ p {
 .error {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #f44336;
+  color: #fff;
   text-align: center;
   margin-top: 20px;
+}
+
+.loadMoreButton {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.loadMoreButton button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.loadMoreButton button:hover {
+  background-color: #45a049;
 }

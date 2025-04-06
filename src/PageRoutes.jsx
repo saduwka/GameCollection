@@ -17,20 +17,17 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 
 const PageRoutes = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Состояние для открытия/закрытия сайдбара
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); 
   const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen); // Переключение состояния
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
     <Router>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "flex", marginTop: "60px" }}>
-          {" "}
-          {/* Отступ сверху для контента */}
-          <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> {/* Передаем пропсы в Sidebar */}
-          <div style={{ marginLeft: isSidebarOpen ? "220px" : "0", padding: "20px", flex: 1 }}>
+      <div style={{ display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
+        <div style={{ display: "flex" }}>
+          <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> 
+          <div style={{ marginLeft: isSidebarOpen ? "220px" : "0", flex: 1 }}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/consoles" element={<ConsolesPage />} />

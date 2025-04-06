@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const API_URL = "https://api.rawg.io/api/developers";
-const apiKey = "97d7d537cfa34027be12ab4dfea87d96";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 export const getDevelopers = async () => {
   try {
-    const response = await axios.get(`${API_URL}?key=${apiKey}`);
+    const response = await axios.get(`${API_URL}?key=${API_KEY}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching developer details:", error);
@@ -16,7 +16,7 @@ export const getDevelopers = async () => {
 export const getGamesForDeveloper = async (id) => {
   try {
     const response = await axios.get(
-      `https://api.rawg.io/api/games?developers=${id}&key=${apiKey}`
+      `https://api.rawg.io/api/games?developers=${id}&key=${API_KEY}`
     );
     return response.data.results;
   } catch (error) {
@@ -27,10 +27,10 @@ export const getGamesForDeveloper = async (id) => {
 
 export const getDeveloperDetails = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}?key=${apiKey}`); // Используем id из аргумента
-    return response.data; // Возвращаем данные консоли
+    const response = await axios.get(`${API_URL}/${id}?key=${API_KEY}`); 
+    return response.data; 
   } catch (error) {
     console.error("Error fetching developer details:", error);
-    throw new Error("Developer not found"); // Бросаем ошибку, если консоль не найдена
+    throw new Error("Developer not found");
   }
 };

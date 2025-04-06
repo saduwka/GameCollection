@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const API_URL = "https://api.rawg.io/api/platforms";
-const apiKey = "97d7d537cfa34027be12ab4dfea87d96";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 export const getConsoleDetails = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}?key=${apiKey}`);
+    const response = await axios.get(`${API_URL}/${id}?key=${API_KEY}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching console details:", error);
@@ -13,10 +13,10 @@ export const getConsoleDetails = async (id) => {
   }
 };
 
-export const getGamesForConsole = async (id) => {
+export const getGamesForConsole = async (id, page = 1) => {
   try {
     const response = await axios.get(
-      `https://api.rawg.io/api/games?platforms=${id}&key=${apiKey}`
+      `https://api.rawg.io/api/games?platforms=${id}&page=${page}&key=${API_KEY}`
     );
     return response.data.results;
   } catch (error) {
