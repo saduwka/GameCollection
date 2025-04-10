@@ -1,8 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 
-function Sidebar({ isOpen, toggleSidebar }) {
+const Sidebar = ({ isOpen, toggleSidebar }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+
+    navigate("/login");
+  };
+
   return (
     <div>
       <div className={styles.burgerIcon} onClick={toggleSidebar}>
@@ -25,13 +33,15 @@ function Sidebar({ isOpen, toggleSidebar }) {
           <li>
             <Link to="/genres">Genres</Link>
           </li>
-          {/* <li>
-            <Link to="/creators">Creators</Link>
-          </li> */}
         </ul>
+        <li>
+          <button onClick={handleLogout} className={styles.logoutButton}>
+            Logout
+          </button>
+        </li>
       </div>
     </div>
   );
-}
+};
 
 export default Sidebar;
