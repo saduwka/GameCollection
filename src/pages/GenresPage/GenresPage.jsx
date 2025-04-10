@@ -19,7 +19,7 @@ function GenresPage() {
   return (
     <div className={styles.genresPage}>
       <div className={styles.content}>
-        <h1>Genres</h1>
+        <h1 className={styles.heading}>Genres</h1>
         <div className={styles.genresList}>
           {genres && genres.length > 0 ? (
             genres.map((genre) => (

@@ -40,13 +40,20 @@ const GenrePage = () => {
 
   return (
     <div className={styles.genrePage}>
-      <LoadingErrorMessage loading={loading} error={false} noResults={!hasMore} />
-      
+      <LoadingErrorMessage
+        loading={loading}
+        error={false}
+        noResults={!hasMore}
+      />
+
       {genreDetails && (
         <>
+          <div className={styles.backButton}>
+            <Link to="/genres">← Back to genres</Link>
+          </div>
           <h1>{genreDetails.name}</h1>
           <p>{genreDetails.description}</p>
-          <h2 className={styles.heading}>Games on {genreDetails.name}</h2>
+          <h2>Games on {genreDetails.name}</h2>
           <div className={styles.gameList}>
             {games.map((game) => (
               <Link
@@ -61,7 +68,6 @@ const GenrePage = () => {
                     className={styles.gameImage}
                   />
                   <h3>{game.name}</h3>
-                  <p>{game.released}</p>
                 </div>
               </Link>
             ))}

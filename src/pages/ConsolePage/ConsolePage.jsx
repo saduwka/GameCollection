@@ -5,6 +5,7 @@ import {
   getGamesForConsole
 } from "../../services/consoleServices";
 import styles from "./ConsolePage.module.css";
+import GameCard from "../../components/GameCard/GameCard";
 
 const ConsolePage = () => {
   const { id } = useParams();
@@ -57,7 +58,7 @@ const ConsolePage = () => {
   return (
     <div className={styles.consolePage}>
       <div className={styles.backButton}>
-        <Link to="/consoles">Back to platforms</Link>
+        <Link to="/consoles">← Back to platforms</Link>
       </div>
       <h1>{consoleDetails.name}</h1>
       <p className={styles.description}>{consoleDetails.description}</p>
@@ -69,14 +70,7 @@ const ConsolePage = () => {
             key={`${game.id}-${index}`}
             className={styles.gameCardLink}
           >
-            <div className={styles.gameCard}>
-              <img
-                src={game.background_image}
-                alt={game.name}
-                className={styles.gameImage}
-              />
-              <h3>{game.name}</h3>
-            </div>
+            <GameCard game={game} />
           </Link>
         ))}
       </div>

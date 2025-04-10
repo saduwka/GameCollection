@@ -3,7 +3,7 @@ import styles from "./GameCard.module.css";
 
 export default function GameCard({ game }) {
   if (!game || !game.name || !game.background_image) {
-    return <div>Loading...</div>; // Показываем лоадер, если данных нет
+    return <div>Loading...</div>; 
   }
 
   return (

@@ -20,7 +20,7 @@ function CreatorsPage() {
   return (
     <div className={styles.creatorsPage}>
       <div className={styles.content}>
-        <h1>Creators</h1>
+        <h1 className={styles.heading}>Creators</h1>
         <div className={styles.creatorsList}>
           {creators.map((creator) => (
             <Link key={creator.id} to={`/creators/${creator.id}`}>

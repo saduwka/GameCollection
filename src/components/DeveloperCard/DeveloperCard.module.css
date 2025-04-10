@@ -1,22 +1,38 @@
 .developerCard {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    text-align: center;
-    padding: 10px;
-    transition: transform 0.3s ease;
-    width: 300px;
+  background-color: #d3d3d3;
+  width: 250px;
+  height: 350px;
+  border-radius: 10px;
+  padding: 15px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 3px solid #333;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+  text-align: center;
+  justify-content: flex-start;
+}
+
+.developerCard:hover {
+  transform: scale(1.05);
 }
 
 .developerCardImg {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 .developerCard h3 {
-    font-size: 1.2rem;
-    margin-top: 10px;
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: "Courier New", Courier, monospace;
+  word-wrap: break-word;
 }

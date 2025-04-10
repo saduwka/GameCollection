@@ -25,9 +25,9 @@ function Sidebar({ isOpen, toggleSidebar }) {
           <li>
             <Link to="/genres">Genres</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/creators">Creators</Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

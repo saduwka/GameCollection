@@ -61,3 +61,10 @@ p {
   color: #fff;
   text-align: center;
 }
+
+.heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+  margin-left: 100px;
+  color: #fff;
+}

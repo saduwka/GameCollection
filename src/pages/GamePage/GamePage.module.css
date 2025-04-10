@@ -1,8 +1,9 @@
 .gamePageContainer {
   display: flex;
   flex-direction: column;
-  padding: 0 200px;
-  flex: 1;
+  min-height: 100vh;
+  margin: 50px 100px;
+  gap: 20px;
 }
 
 .gamePageHeader {
@@ -17,6 +18,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  gap: 20px;
 }
 
 .gamePageImage {
@@ -36,6 +38,8 @@
   font-size: 20px;
   margin: 10px 0;
   color: #555;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 400;
 }
 
 .gamePageDetails strong {
@@ -66,6 +70,25 @@
 
 .platformLink:hover {
   text-decoration: underline;
+}
+
+.backButton {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+}
+
+.backButton:hover {
+  background-color: #45a049;
 }
 
 @media (max-width: 768px) {

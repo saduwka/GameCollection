@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getGameDetails } from "../../services/gamesServices";
 import styles from "./GamePage.module.css";
 
 function GamePage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [gameDetails, setGameDetails] = useState(null);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ function GamePage() {
 
   return (
     <div className={styles.gamePageContainer}>
+      <button onClick={() => navigate(-1)} className={styles.backButton}>← Back</button>
       <h1 className={styles.gamePageHeader}>{gameDetails.name}</h1>
       <div className={styles.gamePageImageContainer}>
         <img
@@ -27,6 +29,7 @@ function GamePage() {
           src={gameDetails.background_image || gameDetails.image_background}
           alt={gameDetails.name}
         />
+        <img className={styles.gamePageImage} src={gameDetails.background_image_additional} alt={gameDetails.name} />
       </div>
       <div className={styles.gamePageDetails}>
         <p>

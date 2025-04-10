@@ -39,6 +39,9 @@ const DeveloperPage = () => {
 
   return (
     <div className={styles.developerPage}>
+      <div className={styles.backButton}>
+        <Link to="/developers">← Back to developers</Link>
+      </div>
       <h1>{developerDetails.name}</h1>
       <p>{developerDetails.description}</p>
       <h2>Games by {developerDetails.name}</h2>
@@ -50,13 +53,12 @@ const DeveloperPage = () => {
             className={styles.gameCardLink}
           >
             <div className={styles.gameCard}>
-              <h3>{game.name}</h3>
               <img
                 src={game.background_image}
                 alt={game.name}
                 className={styles.gameImage}
               />
-              <p>{game.released}</p>
+              <h3>{game.name}</h3>
             </div>
           </Link>
         ))}

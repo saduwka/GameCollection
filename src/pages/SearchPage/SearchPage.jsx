@@ -23,7 +23,7 @@ const SearchPage = () => {
   return (
     <div className={styles.searchPage}>
       <div className={styles.content}>
-        <h1>Results</h1>
+        <h1 className={styles.heading}>Results</h1>
 
         <div className={styles.searchForm}>
           <input

@@ -4,7 +4,6 @@ import styles from "./HomePage.module.css";
 import { SearchContext } from "../../contexts/SearchContext";
 
 function HomePage() {
-  const [randomGame, setRandomGame] = useState(null);
   const navigate = useNavigate();
 
   const { searchQuery, setSearchQuery } = useContext(SearchContext);
@@ -22,6 +21,11 @@ function HomePage() {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleRandomGameClick();
+            }
+          }}
           placeholder="Search games..."
           className={styles.searchInput}
         />

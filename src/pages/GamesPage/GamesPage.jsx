@@ -26,8 +26,8 @@ function GamesPage() {
   useEffect(() => {
     const getGames = async () => {
       setLoading(true);
-      const gamesData = await fetchGames(currentPage); // Передаем currentPage
-      let sortedGames = gamesData.games; // gamesData.games – массив игр
+      const gamesData = await fetchGames(currentPage); 
+      let sortedGames = gamesData.games; 
 
       if (filter === "popular") {
         sortedGames = sortByPopularity(sortedGames);
@@ -38,17 +38,17 @@ function GamesPage() {
       }
 
       setGames(sortedGames);
-      setNextPageUrl(gamesData.nextPageUrl); // Предполагаем, что nextPageUrl приходит из ответа
+      setNextPageUrl(gamesData.nextPageUrl); 
       setLoading(false);
     };
 
     getGames();
-  }, [filter, currentPage]); // Добавляем currentPage в зависимости
+  }, [filter, currentPage]); 
 
   return (
     <div className={styles.gamesPage}>
       <div className={styles.content}>
-        <h1>Games List</h1>
+        <h1 className={styles.heading}>Games List</h1>
         <div className={styles.filters}>
           <button onClick={() => setFilter("random")}>Random</button>
           <button onClick={() => setFilter("popular")}>Popular</button>
