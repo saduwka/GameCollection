@@ -89,20 +89,13 @@ p {
 .loadMoreButton button {
   padding: 10px 20px;
   font-size: 1rem;
-  background-color: #4CAF50;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
-.loadMoreButton button:hover {
-  background-color: #45a049;
-}
-
 .backButton {
-  background-color: #4CAF50;
   border: none;
   color: #fff;
   padding: 10px 20px;
@@ -115,10 +108,6 @@ p {
   transition: background-color 0.3s ease;
   width: fit-content;
   margin-top: 20px;
-}
-
-.backButton:hover {
-  background-color: #45a049;
 }
 
 .backButton a {

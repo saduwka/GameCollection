@@ -8,6 +8,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
 
+    toggleSidebar();
     navigate("/login");
   };
 
@@ -19,19 +20,19 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={toggleSidebar}>Home</Link>
           </li>
           <li>
-            <Link to="/consoles">Platform</Link>
+            <Link to="/consoles" onClick={toggleSidebar}>Platform</Link>
           </li>
           <li>
-            <Link to="/games">Games</Link>
+            <Link to="/games" onClick={toggleSidebar}>Games</Link>
           </li>
           <li>
-            <Link to="/developers">Developers</Link>
+            <Link to="/developers" onClick={toggleSidebar}>Developers</Link>
           </li>
           <li>
-            <Link to="/genres">Genres</Link>
+            <Link to="/genres" onClick={toggleSidebar}>Genres</Link>
           </li>
         </ul>
         <li>

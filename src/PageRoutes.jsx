@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import ConsolePage from "./pages/ConsolePage/ConsolePage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
@@ -16,6 +16,7 @@ import GenrePage from "./pages/GenrePage/GenrePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import { AnimatePresence } from "framer-motion";
 
 const PageRoutes = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -23,20 +24,21 @@ const PageRoutes = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const location = useLocation();
   return (
-    <Router>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          overflow: "hidden"
-        }}
-      >
-        <div style={{ display: "flex" }}>
-          <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-          <div style={{ marginLeft: isSidebarOpen ? "220px" : "0", flex: 1 }}>
-            <Routes>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        overflow: "hidden"
+      }}
+    >
+      <div style={{ display: "flex" }}>
+        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <div style={{ marginLeft: isSidebarOpen ? "220px" : "0", flex: 1 }}>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
               <Route path="/login" element={<LoginPage />} />
               <Route
                 path="/"
@@ -137,10 +139,10 @@ const PageRoutes = () => {
                 }
               />
             </Routes>
-          </div>
+          </AnimatePresence>
         </div>
       </div>
-    </Router>
+    </div>
   );
 };
 

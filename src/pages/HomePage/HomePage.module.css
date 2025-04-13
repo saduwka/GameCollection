@@ -58,12 +58,6 @@ input::placeholder {
   font-family: 'Pixelated', 'Press Start 2P', cursive;
   border: none;
   border-radius: 10px;
-  background-color: #ffcc00;
-  color: #000;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-.searchButton:hover {
-  background-color: #e6b800;
 }

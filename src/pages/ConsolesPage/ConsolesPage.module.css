@@ -32,7 +32,6 @@
 }
 
 .sortButton {
-  background-color: #4CAF50;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -46,9 +45,6 @@
   font-family: 'Pixelated', 'Press Start 2P', cursive;
 }
 
-.sortButton:hover {
-  background-color: #45a049;
-}
 
 .sortButton.active {
   border: 2px solid #fff;

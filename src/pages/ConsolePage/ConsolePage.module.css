@@ -101,7 +101,6 @@ h1 {
 .loadMoreButton button {
   padding: 10px 20px;
   font-size: 1rem;
-  background-color: #4CAF50;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -109,12 +108,7 @@ h1 {
   transition: background-color 0.3s;
 }
 
-.loadMoreButton button:hover {
-  background-color: #45a049;
-}
-
 .backButton {
-  background-color: #4CAF50;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -128,10 +122,6 @@ h1 {
   width: fit-content;
   margin-top: 20px;
   font-family: 'Pixelated', 'Press Start 2P', cursive;
-}
-
-.backButton:hover {
-  background-color: #45a049;
 }
 
 .backButton a {
