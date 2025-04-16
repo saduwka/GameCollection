@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import ConsolePage from "./pages/ConsolePage/ConsolePage";
@@ -17,15 +17,13 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import { AnimatePresence } from "framer-motion";
+import FavoritesPage from "./pages/FavoritesPage/FavoritesPage";
+import Header from "./components/Header/Header";  
 
 const PageRoutes = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const location = useLocation();
-  return (
+const location = useLocation();
+const isAuthenticated = !!localStorage.getItem("token");
+return (
     <div
       style={{
         display: "flex",
@@ -34,9 +32,10 @@ const PageRoutes = () => {
         overflow: "hidden"
       }}
     >
+      {isAuthenticated && <Header />}
       <div style={{ display: "flex" }}>
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <div style={{ marginLeft: isSidebarOpen ? "220px" : "0", flex: 1 }}>
+        {isAuthenticated && <Sidebar />}
+        <div style={{ marginLeft: isAuthenticated ? "220px" : "0", flex: 1 }}>
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/login" element={<LoginPage />} />
@@ -126,6 +125,14 @@ const PageRoutes = () => {
                 element={
                   <PrivateRoute>
                     <GenrePage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/favorites"
+                element={
+                  <PrivateRoute>
+                    <FavoritesPage />
                   </PrivateRoute>
                 }
               />

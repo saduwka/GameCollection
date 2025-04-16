@@ -1,45 +1,37 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Sidebar.module.css";
+import logo from "../../assets/logo/logo.svg";
 
-const Sidebar = ({ isOpen, toggleSidebar }) => {
+const Sidebar = () => {
   const navigate = useNavigate();
+  const isAuthenticated = !!localStorage.getItem("token");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-
-    toggleSidebar();
     navigate("/login");
   };
 
   return (
     <div>
-      <div className={styles.burgerIcon} onClick={toggleSidebar}>
-        ☰
-      </div>
-      <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+      <div className={styles.sidebar}>
+        <Link to="/">
+        <img src={logo} alt="Logo" className={styles.logo} /> 
+        </Link>
         <ul>
           <li>
-            <Link to="/" onClick={toggleSidebar}>Home</Link>
+            <Link to="/consoles">Platform</Link>
           </li>
           <li>
-            <Link to="/consoles" onClick={toggleSidebar}>Platform</Link>
+            <Link to="/games">Games</Link>
           </li>
           <li>
-            <Link to="/games" onClick={toggleSidebar}>Games</Link>
+            <Link to="/developers">Developers</Link>
           </li>
           <li>
-            <Link to="/developers" onClick={toggleSidebar}>Developers</Link>
-          </li>
-          <li>
-            <Link to="/genres" onClick={toggleSidebar}>Genres</Link>
+            <Link to="/genres">Genres</Link>
           </li>
         </ul>
-        <li>
-          <button onClick={handleLogout} className={styles.logoutButton}>
-            Logout
-          </button>
-        </li>
       </div>
     </div>
   );

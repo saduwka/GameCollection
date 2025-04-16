@@ -99,3 +99,27 @@
     max-width: 100%;
   }
 }
+
+.statusButtons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.statusButtons button {
+  padding: 8px 14px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.statusButtons button:active {
+  transform: scale(0.98);
+}
+
+.statusButtons button.active {
+  border: 2px solid white;
+}

@@ -7,15 +7,39 @@ function GamePage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [gameDetails, setGameDetails] = useState(null);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     const fetchGameDetails = async () => {
       const data = await getGameDetails(id);
       setGameDetails(data);
+
+      // Проверка на наличие сохранённого статуса в localStorage
+      const saved = localStorage.getItem("favorites");
+      const parsed = saved ? JSON.parse(saved) : {};
+      if (parsed[id]) {
+        setStatus(parsed[id].status);
+      }
     };
 
     fetchGameDetails();
   }, [id]);
+
+  const handleClick = (newStatus) => {
+    const updatedStatus = status === newStatus ? "" : newStatus;
+    setStatus(updatedStatus);
+
+    // Сохранение статуса в localStorage
+    const saved = localStorage.getItem("favorites");
+    const parsed = saved ? JSON.parse(saved) : {};
+    const updated = { ...parsed, [gameDetails.id]: { name: gameDetails.name, status: updatedStatus } };
+
+    if (updatedStatus === "") {
+      delete updated[gameDetails.id];
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(updated));
+  };
 
   if (!gameDetails) return <div className={styles.loading}>Loading...</div>;
 
@@ -30,6 +54,26 @@ function GamePage() {
           alt={gameDetails.name}
         />
         <img className={styles.gamePageImage} src={gameDetails.background_image_additional} alt={gameDetails.name} />
+      </div>
+      <div className={styles.statusButtons}>
+        <button
+          className={status === "played" ? styles.active : ""}
+          onClick={() => handleClick("played")}
+        >
+          ✅ Played
+        </button>
+        <button
+          className={status === "playing" ? styles.active : ""}
+          onClick={() => handleClick("playing")}
+        >
+          🕹️ Playing
+        </button>
+        <button
+          className={status === "wishlist" ? styles.active : ""}
+          onClick={() => handleClick("wishlist")}
+        >
+          📌 Want to Play
+        </button>
       </div>
       <div className={styles.gamePageDetails}>
         <p>
