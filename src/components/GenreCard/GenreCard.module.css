@@ -1,22 +1,28 @@
 .genreCard {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  width: 250px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow: hidden;
+  transition: transform 0.2s ease-in-out;
   text-align: center;
-  padding: 10px;
-  transition: transform 0.3s ease;
-  width: 300px;
+  justify-content: flex-start;
 }
 
 .genreCardImg {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 10px;
 }
 
-.genreCard h3 {
-  font-size: 1.2rem;
-  margin-top: 10px;
+.description {
+  background-color: #282828;
+  width: 100%;
+  height: 60px;
+}
+
+.description h3 {
+  color: #fff;
 }
