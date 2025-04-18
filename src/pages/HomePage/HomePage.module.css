@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  padding: 20px;
+  min-height: 100vh;
   justify-content: center;
 }
 
@@ -15,49 +16,28 @@
   color: #fff;
 }
 
-.searchForm {
+.carouselFullWidth {
+  margin-top: 150px;
+  width: calc(100vw - 200px);
+  margin-left: 50px;
+}
+
+.carouselImage {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  padding: 0 10px;
+}
+
+:global(.slick-slide) {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20px;
-  gap: 20px;
 }
 
-.searchInput {
-  padding: 20px 12px;
-  font-size: 26px;
-  border: none;
-  border-radius: 20px;
-  width: 400px;
-  height: auto;
-  background-color: transparent;
-  color: #fff;
-  font-family: 'Pixelated', 'Press Start 2P', cursive;
-  text-align: center;
-  border: 2px solid #FFF;
-}
-
-input::placeholder {
-  font-family: 'Pixelated', 'Press Start 2P', cursive;
-  font-size: 16px; 
-  color: #777; 
-}
-
-.searchInput::placeholder {
-  color: #fff;
-}
-
-.searchInput:focus {
-  border: 2px solid var(--secondary-color);
-}
-
-.searchButton {
-  padding: 10px 24px;
-  font-size: 14px;
-  font-family: 'Pixelated', 'Press Start 2P', cursive;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+:global(.slick-slider),
+:global(.slick-list),
+:global(.slick-track) {
+  width: 100%;
 }
