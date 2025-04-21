@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import styles from "./HomePage.module.css";
 import GameCard from "../../components/GameCard/GameCard";
@@ -30,6 +30,20 @@ function HomePage() {
     dots: true,
     infinite: true,
     speed: 1500,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
@@ -50,11 +64,13 @@ function HomePage() {
           </div>
         ))}
       </Slider>
-      <div className={styles.tranding}>
-        <h1>Tranding games</h1>
+      <div className={styles.trending}>
+        <h1>Trending games</h1>
         <div className={styles.gameCards}>
           {games.map((game) => (
-            <GameCard key={game.id} game={game} />
+            <Link key={game.id} to={`/games/${game.id}`}>
+              <GameCard game={game} />
+            </Link>
           ))}
         </div>
       </div>

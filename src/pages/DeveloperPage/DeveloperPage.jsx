@@ -43,7 +43,12 @@ const DeveloperPage = () => {
         <Link to="/developers">← Back to developers</Link>
       </div>
       <h1>{developerDetails.name}</h1>
-      <p>{developerDetails.description}</p>
+      {/* Удаляем HTML-теги и декодируем HTML-сущности вроде &#39; → ' */}
+      <p>{
+        new DOMParser()
+          .parseFromString(developerDetails.description, "text/html")
+          .body.textContent
+      }</p>
       <h2>Games by {developerDetails.name}</h2>
       <div className={styles.gameList}>
         {games.map((game) => (

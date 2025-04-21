@@ -61,7 +61,12 @@ const ConsolePage = () => {
         <Link to="/consoles">← Back to platforms</Link>
       </div>
       <h1>{consoleDetails.name}</h1>
-      <p className={styles.description}>{consoleDetails.description}</p>
+      {/* Удаляем HTML-теги и декодируем HTML-сущности вроде &#39; → ' */}
+      <p className={styles.description}>{
+        new DOMParser()
+          .parseFromString(consoleDetails.description, "text/html")
+          .body.textContent
+      }</p>
       <h2 className={styles.heading}>Games on {consoleDetails.name}</h2>
       <div className={styles.gameList}>
         {games.map((game, index) => (

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { SearchContext } from "../../contexts/SearchContext";
-import GameList from "../../components/GameList/GameList";
+import GameCard from "../../components/GameCard/GameCard"; // Импортируем GameCard
 import styles from "./SearchPage.module.css";
 import { useNavigate } from "react-router-dom";
 import LoadingErrorMessage from "../../components/LoadingErrorMessage/LoadingErrorMessage";  // Новый компонент
@@ -25,16 +25,6 @@ const SearchPage = () => {
       <div className={styles.content}>
         <h1 className={styles.heading}>Results</h1>
 
-        <div className={styles.searchForm}>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search for games..."
-            className={styles.searchInput}
-          />
-        </div>
-
         <LoadingErrorMessage 
           loading={loading} 
           error={error} 
@@ -42,9 +32,11 @@ const SearchPage = () => {
         />
         
         {searchQuery && filteredGames.length > 0 && (
-          <GameList 
-            onGameClick={handleGameClick}  // Передаем функцию клика
-          />
+          <div className={styles.gameList}>
+            {filteredGames.map((game) => (
+              <GameCard key={game.id} game={game} />
+            ))}
+          </div>
         )}
       </div>
     </div>

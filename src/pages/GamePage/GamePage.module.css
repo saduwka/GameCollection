@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  margin: 100px 50px;
+  margin: 120px 50px;
   gap: 20px;
 }
 
@@ -22,9 +22,14 @@
 }
 
 .gamePageImage {
-  max-width: 600px;
-  height: auto;
+  width: 400px;
+  height: 250px;
+  object-fit: cover;
   border-radius: 8px;
+}
+
+img:hover {
+  cursor: pointer;
 }
 
 .gamePageDetails {
@@ -123,3 +128,30 @@
 .statusButtons button.active {
   border: 2px solid white;
 }
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modalContent {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.modalImage {
+  width: 800px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+

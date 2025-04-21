@@ -8,6 +8,7 @@ function GamePage() {
   const navigate = useNavigate();
   const [gameDetails, setGameDetails] = useState(null);
   const [status, setStatus] = useState("");
+  const [modalImage, setModalImage] = useState(null);
 
   useEffect(() => {
     const fetchGameDetails = async () => {
@@ -52,8 +53,14 @@ function GamePage() {
           className={styles.gamePageImage}
           src={gameDetails.background_image || gameDetails.image_background}
           alt={gameDetails.name}
+          onClick={() => setModalImage(gameDetails.background_image || gameDetails.image_background)}
         />
-        <img className={styles.gamePageImage} src={gameDetails.background_image_additional} alt={gameDetails.name} />
+        <img
+          className={styles.gamePageImage}
+          src={gameDetails.background_image_additional}
+          alt={gameDetails.name}
+          onClick={() => setModalImage(gameDetails.background_image_additional)}
+        />
       </div>
       <div className={styles.statusButtons}>
         <button
@@ -122,6 +129,13 @@ function GamePage() {
           </p>
         )}
       </div>
+      {modalImage && (
+        <div className={styles.modalOverlay} onClick={() => setModalImage(null)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <img src={modalImage} alt="Game Fullscreen" className={styles.modalImage} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
