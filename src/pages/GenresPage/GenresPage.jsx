@@ -3,14 +3,25 @@ import { Link } from "react-router-dom";
 import { getGenres } from "../../services/genreServices";
 import styles from "./GenresPage.module.css";
 import GenreCard from "../../components/GenreCard/GenreCard";
+import LoadingErrorMessage from "../../components/LoadingErrorMessage/LoadingErrorMessage";
 
 function GenresPage() {
   const [genres, setGenres] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchGenres = async () => {
-      const data = await getGenres();
-      setGenres(Array.isArray(data.results) ? data.results : []);
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await getGenres();
+        setGenres(Array.isArray(data.results) ? data.results : []);
+      } catch (err) {
+        setError("Failed to fetch genres");
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchGenres();
@@ -20,17 +31,20 @@ function GenresPage() {
     <div className={styles.genresPage}>
       <div className={styles.content}>
         <h1 className={styles.heading}>Genres</h1>
-        <div className={styles.genresList}>
-          {genres && genres.length > 0 ? (
-            genres.map((genre) => (
+        <LoadingErrorMessage
+          loading={loading}
+          error={error}
+          noResults={!loading && !error && genres.length === 0}
+        />
+        {!loading && !error && genres.length > 0 && (
+          <div className={styles.genresList}>
+            {genres.map((genre) => (
               <Link key={genre.id} to={`/genres/${genre.id}`}>
                 <GenreCard genre={genre} />
               </Link>
-            ))
-          ) : (
-            <p>No genres found</p>
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

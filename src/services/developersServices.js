@@ -3,9 +3,18 @@ import axios from "axios";
 const API_URL = "https://api.rawg.io/api/developers";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
+const developersCache = {};
+const developerGamesCache = {};
+const fetchDevelopersCache = {};
+
 export const getDevelopers = async (page = 1) => {
+  if (developersCache[page]) {
+    return developersCache[page];
+  }
+
   try {
     const response = await axios.get(`${API_URL}?key=${API_KEY}&page=${page}`);
+    developersCache[page] = response.data;
     return response.data;
   } catch (error) {
     console.error("Error fetching developer details:", error);
@@ -14,10 +23,15 @@ export const getDevelopers = async (page = 1) => {
 };
 
 export const getGamesForDeveloper = async (id) => {
+  if (developerGamesCache[id]) {
+    return developerGamesCache[id];
+  }
+
   try {
     const response = await axios.get(
       `https://api.rawg.io/api/games?developers=${id}&key=${API_KEY}`
     );
+    developerGamesCache[id] = response.data.results;
     return response.data.results;
   } catch (error) {
     console.error("Error fetching games for console:", error);
@@ -26,8 +40,13 @@ export const getGamesForDeveloper = async (id) => {
 };
 
 export const getDeveloperDetails = async (id) => {
+  if (developersCache[id]) {
+    return developersCache[id];
+  }
+
   try {
     const response = await axios.get(`${API_URL}/${id}?key=${API_KEY}`); 
+    developersCache[id] = response.data;
     return response.data; 
   } catch (error) {
     console.error("Error fetching developer details:", error);
@@ -36,6 +55,10 @@ export const getDeveloperDetails = async (id) => {
 };
 
 export const fetchDevelopers = async (searchQuery = "") => {
+  if (fetchDevelopersCache[searchQuery]) {
+    return fetchDevelopersCache[searchQuery];
+  }
+
   const allDevelopers = [];
   let nextUrl = `${API_URL}?key=${API_KEY}&page_size=100&search=${searchQuery}`;
 
@@ -56,5 +79,6 @@ export const fetchDevelopers = async (searchQuery = "") => {
     }
   }
 
+  fetchDevelopersCache[searchQuery] = allDevelopers;
   return allDevelopers;
 };

@@ -1,5 +1,5 @@
 .genrePage {
-  margin: 120px 50px;
+  margin: 150px 50px;
 }
 
 h1 {
@@ -13,11 +13,8 @@ h2 {
   color: #fff;
 }
 
-p {
-  color: #fff;
-  font-size: 1rem;
-  line-height: 1.5;
-  margin-top: 10px;
+.description {
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .gameList {
@@ -36,7 +33,7 @@ p {
 
 .gameCard {
   background-color: #d3d3d3;
-  width: 250px;
+  width: 200px;
   height: 350px;
   border-radius: 10px;
   padding: 15px;

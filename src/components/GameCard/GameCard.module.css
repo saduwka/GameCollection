@@ -1,6 +1,6 @@
 .gameCard {
   background-color: transparent;
-  width: 250px;
+  width: 200px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9,10 +9,6 @@
   transition: transform 0.2s ease-in-out;
   text-align: center;
   justify-content: flex-start;
-}
-
-.gameCard:hover {
-  transform: scale(1.05);
 }
 
 h3 {

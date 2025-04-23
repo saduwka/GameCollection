@@ -18,7 +18,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import { AnimatePresence } from "framer-motion";
 import FavoritesPage from "./pages/FavoritesPage/FavoritesPage";
-import Header from "./components/Header/Header";  
+import Header from "./components/Header/Header"; 
 
 const PageRoutes = () => {
 const location = useLocation();

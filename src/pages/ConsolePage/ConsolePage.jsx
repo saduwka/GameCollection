@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom"; // добавлен useNavigate
 import {
   getConsoleDetails,
   getGamesForConsole
 } from "../../services/consoleServices";
 import styles from "./ConsolePage.module.css";
 import GameCard from "../../components/GameCard/GameCard";
+import LoadingErrorMessage from "../../components/LoadingErrorMessage/LoadingErrorMessage";
 
 const ConsolePage = () => {
   const { id } = useParams();
@@ -14,6 +15,9 @@ const ConsolePage = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [error, setError] = useState(null);
+  
+  const navigate = useNavigate(); // добавлено использование useNavigate
 
   useEffect(() => {
     const fetchConsoleDetails = async () => {
@@ -23,7 +27,7 @@ const ConsolePage = () => {
         setConsoleDetails(details);
         setLoading(false);
       } catch (error) {
-        console.error(error);
+        setError("Failed to fetch console details");
         setLoading(false);
       }
     };
@@ -40,46 +44,46 @@ const ConsolePage = () => {
           setGames((prevGames) => [...prevGames, ...consoleGames]);
         }
       } catch (error) {
-        console.error("Error fetching games:", error);
+        setError("Error fetching games");
         setHasMore(false);
       }
     };
     fetchGames();
   }, [id, page]);
 
-  if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
-  }
-
-  if (!consoleDetails) {
-    return <div className={styles.error}>Console not found</div>;
-  }
-
   return (
     <div className={styles.consolePage}>
-      <div className={styles.backButton}>
-        <Link to="/consoles">← Back to platforms</Link>
-      </div>
-      <h1>{consoleDetails.name}</h1>
-      {/* Удаляем HTML-теги и декодируем HTML-сущности вроде &#39; → ' */}
-      <p className={styles.description}>{
-        new DOMParser()
-          .parseFromString(consoleDetails.description, "text/html")
-          .body.textContent
-      }</p>
-      <h2 className={styles.heading}>Games on {consoleDetails.name}</h2>
-      <div className={styles.gameList}>
-        {games.map((game, index) => (
-          <Link
-            to={`/games/${game.id}`}
-            key={`${game.id}-${index}`}
-            className={styles.gameCardLink}
-          >
-            <GameCard game={game} />
-          </Link>
-        ))}
-      </div>
-      {hasMore && (
+      <button onClick={() => navigate(-1)} className={styles.backButton}>← Back</button>
+      {consoleDetails && <h1>{consoleDetails.name}</h1>}
+      {consoleDetails && (
+        <p className={styles.description}>
+          {new DOMParser()
+            .parseFromString(consoleDetails.description, "text/html")
+            .body.textContent}
+        </p>
+      )}
+      <h2 className={styles.heading}>
+        {consoleDetails ? `Games on ${consoleDetails.name}` : ""}
+      </h2>
+      <LoadingErrorMessage
+        loading={loading}
+        error={error}
+        noResults={!loading && !error && games.length === 0}
+      />
+      {!loading && !error && games.length > 0 && (
+        <div className={styles.gameList}>
+          {games.map((game, index) => (
+            <Link
+              to={`/games/${game.id}`}
+              key={`${game.id}-${index}`}
+              className={styles.gameCardLink}
+            >
+              <GameCard game={game} />
+            </Link>
+          ))}
+        </div>
+      )}
+      {hasMore && !loading && !error && (
         <div className={styles.loadMoreButton}>
           <button onClick={() => setPage((prev) => prev + 1)}>Load More</button>
         </div>

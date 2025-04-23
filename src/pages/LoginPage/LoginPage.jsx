@@ -33,8 +33,8 @@ export default function LoginPage() {
       {!showLoginForm ? (
         <motion.div
           className={styles.welcomeScreen}
-          initial={{ x: 0 }}
-          animate={{ x: animationStarted ? "-100%" : 0 }}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: animationStarted ? 0 : 1 }}
           transition={{ duration: 1 }}
         >
           <img
@@ -52,28 +52,33 @@ export default function LoginPage() {
       ) : (
         <motion.div
           className={styles.loginForm}
-          initial={{ opacity: 0, x: "100%" }}
-          animate={{ opacity: 1, x: "0%" }}
-          transition={{ duration: 1 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: showLoginForm ? 1 : 0, scale: showLoginForm ? 1 : 0.95 }}
+          transition={{ duration: 1, delay: 0.5 }}
         >
-          <h2>Login</h2>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <button type="submit">Login</button>
-          </form>
+          <div className={styles.formContent}>
+            <h2>Welcome to gaming world</h2>
+            <p className={styles.description}>Log in and let the game begin!</p>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button className={styles.submitBtn} type="submit">
+                <span>Login</span>
+              </button>
+            </form>
+          </div>
         </motion.div>
       )}
     </div>

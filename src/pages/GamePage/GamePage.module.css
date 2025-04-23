@@ -1,8 +1,14 @@
 .gamePageContainer {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  margin: 120px 50px;
+  margin: 150px 50px 0 50px;
+  gap: 20px;
+}
+
+.gameWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
   gap: 20px;
 }
 
@@ -16,7 +22,8 @@
 
 .gamePageImageContainer {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   margin-bottom: 20px;
   gap: 20px;
 }
@@ -33,23 +40,24 @@ img:hover {
 }
 
 .gamePageDetails {
-  background-color: #fff;
+  background-color: #646464;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+  }
 
 .gamePageDetails p {
-  font-size: 20px;
+  font-size: 16px;
   margin: 10px 0;
-  color: #555;
+  color: #fff;
   font-family: "Courier New", Courier, monospace;
   font-weight: 400;
+  text-align: left;
 }
 
 .gamePageDetails strong {
   font-weight: bold;
-  color: #000;
+  color: #fff;
 }
 
 .gamePageDetails a {
@@ -116,6 +124,7 @@ img:hover {
 .statusButtons button {
   padding: 8px 14px;
   font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s ease;

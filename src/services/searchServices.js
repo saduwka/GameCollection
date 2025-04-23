@@ -1,7 +1,13 @@
 const API_URL = "https://api.rawg.io/api/games";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
+const searchCache = {};
+
 export const fetchGames = async (searchQuery = "") => {
+  if (searchCache[searchQuery]) {
+    return searchCache[searchQuery];
+  }
+
   const allGames = [];
   let nextUrl = `${API_URL}?key=${API_KEY}&page_size=100&search=${searchQuery}`;
 
@@ -22,5 +28,6 @@ export const fetchGames = async (searchQuery = "") => {
     }
   }
 
+  searchCache[searchQuery] = allGames;
   return allGames;
 };

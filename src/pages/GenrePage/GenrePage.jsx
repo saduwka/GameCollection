@@ -6,12 +6,14 @@ import {
 } from "../../services/genreServices";
 import styles from "./GenrePage.module.css";
 import LoadingErrorMessage from "../../components/LoadingErrorMessage/LoadingErrorMessage";
+import GameCard from "../../components/GameCard/GameCard";
 
 const GenrePage = () => {
   const { id } = useParams();
   const [genreDetails, setGenreDetails] = useState(null);
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
@@ -19,6 +21,7 @@ const GenrePage = () => {
     const fetchGenreDetails = async () => {
       try {
         setLoading(true);
+        setError(false);
         if (!genreDetails) {
           const details = await getGenresDetails(id);
           setGenreDetails(details);
@@ -32,6 +35,7 @@ const GenrePage = () => {
         setLoading(false);
       } catch (error) {
         console.error(error);
+        setError(true);
         setLoading(false);
       }
     };
@@ -42,17 +46,21 @@ const GenrePage = () => {
     <div className={styles.genrePage}>
       <LoadingErrorMessage
         loading={loading}
-        error={false}
-        noResults={!hasMore}
+        error={error}
+        noResults={!hasMore && games.length === 0}
       />
 
-      {genreDetails && (
+      {genreDetails && !loading && !error && (
         <>
           <div className={styles.backButton}>
             <Link to="/genres">← Back to genres</Link>
           </div>
           <h1>{genreDetails.name}</h1>
-          <p>{genreDetails.description}</p>
+          <p className={styles.description}>
+            {new DOMParser()
+              .parseFromString(genreDetails.description, "text/html")
+              .body.textContent}
+          </p>
           <h2>Games on {genreDetails.name}</h2>
           <div className={styles.gameList}>
             {games.map((game) => (
@@ -61,21 +69,14 @@ const GenrePage = () => {
                 key={game.id}
                 className={styles.gameCardLink}
               >
-                <div className={styles.gameCard}>
-                  <img
-                    src={game.background_image}
-                    alt={game.name}
-                    className={styles.gameImage}
-                  />
-                  <h3>{game.name}</h3>
-                </div>
+                <GameCard game={game} />
               </Link>
             ))}
           </div>
         </>
       )}
 
-      {hasMore && (
+      {hasMore && !loading && !error && (
         <div className={styles.loadMoreButton}>
           <button type="button" onClick={() => setPage((prev) => prev + 1)}>
             Load More

@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
 import { SearchContext } from "../../contexts/SearchContext";
-import GameCard from "../../components/GameCard/GameCard"; // Импортируем GameCard
+import GameCard from "../../components/GameCard/GameCard";
 import styles from "./SearchPage.module.css";
 import { useNavigate } from "react-router-dom";
-import LoadingErrorMessage from "../../components/LoadingErrorMessage/LoadingErrorMessage";  // Новый компонент
+import LoadingErrorMessage from "../../components/LoadingErrorMessage/LoadingErrorMessage";
 
 const SearchPage = () => {
   const {
     searchQuery,
-    setSearchQuery,
     filteredGames,
     loading,
     error
@@ -28,15 +27,17 @@ const SearchPage = () => {
         <LoadingErrorMessage 
           loading={loading} 
           error={error} 
-          noResults={!searchQuery || filteredGames.length === 0} 
+          noResults={filteredGames.length === 0 && !loading} 
         />
-        
-        {searchQuery && filteredGames.length > 0 && (
+
+        {!loading && !error && filteredGames.length > 0 && (
           <div className={styles.gameList}>
-            {filteredGames.map((game) => (
-              <GameCard key={game.id} game={game} />
-            ))}
-          </div>
+          {filteredGames.map((game) => (
+            <div key={game.id} onClick={() => handleGameClick(game.id)}>
+              <GameCard game={game} />
+            </div>
+          ))}
+        </div>
         )}
       </div>
     </div>

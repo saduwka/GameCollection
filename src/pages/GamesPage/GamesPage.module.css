@@ -1,8 +1,10 @@
 .gamesPage {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
-  margin: 120px 50px;
+  margin: 150px 50px;
   gap: 20px;
 }
 

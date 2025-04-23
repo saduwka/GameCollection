@@ -5,6 +5,7 @@ import styles from "./Header.module.css";
 import searchIcon from "../../assets/icons/search.png";
 import favoritesIcon from "../../assets/icons/favorites.svg";
 import logoutIcon from "../../assets/icons/logout.svg";
+import logo from "../../assets/logo/logo.svg";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,7 +23,13 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <h1 className={styles.heading}>PlayHub</h1>
+      <div >
+        <Link to="/" className={styles.logoWrapper}>
+          <img src={logo} alt="Logo" className={styles.logo} />
+          <h1 className={styles.heading}>PlayHub</h1> 
+        </Link>
+        
+      </div>
       <div className={styles.searchForm}>
         <input
           type="text"
@@ -46,12 +53,16 @@ const Header = () => {
       {isAuthenticated && (
         <div className={styles.userCard}>
           <Link to="/favorites" className={styles.favLink}>
-            <img src={favoritesIcon} alt="Favorites" className={styles.favIcon}/>
+            <img
+              src={favoritesIcon}
+              alt="Favorites"
+              className={styles.favIcon}
+            />
             <span className={styles.favHeading}>Favorites</span>
           </Link>
 
           <span onClick={handleLogout} className={styles.logoutButton}>
-            <img src={logoutIcon} alt="logout" className={styles.logoutIcon}/>
+            <img src={logoutIcon} alt="logout" className={styles.logoutIcon} />
             Logout
           </span>
         </div>
