@@ -12,7 +12,8 @@ const GenrePage = () => {
   const { id } = useParams();
   const [genreDetails, setGenreDetails] = useState(null);
   const [games, setGames] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(false);
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -20,37 +21,56 @@ const GenrePage = () => {
   useEffect(() => {
     const fetchGenreDetails = async () => {
       try {
-        setLoading(true);
+        if (page === 1) {
+          setInitialLoading(true);
+        } else {
+          setPageLoading(true);
+        }
+
         setError(false);
+
         if (!genreDetails) {
           const details = await getGenresDetails(id);
           setGenreDetails(details);
         }
+
         const genreGames = await getGamesForGenre(id, page);
-        if (genreGames.length === 0) {
-          setHasMore(false);
+
+        if (genreGames.length > 0) {
+          const sortedGames = genreGames.sort((a, b) => b.rating - a.rating);
+          setGames((prevGames) => [...prevGames, ...sortedGames]);
+          if (genreGames.length < 10) {
+            setHasMore(false);
+          }
         } else {
-          setGames((prevGames) => [...prevGames, ...genreGames]);
+          setHasMore(false);
         }
-        setLoading(false);
+
+        if (page === 1) {
+          setInitialLoading(false);
+        } else {
+          setPageLoading(false);
+        }
       } catch (error) {
         console.error(error);
         setError(true);
-        setLoading(false);
+        setInitialLoading(false);
+        setPageLoading(false);
       }
     };
+
     fetchGenreDetails();
   }, [id, page]);
 
   return (
     <div className={styles.genrePage}>
       <LoadingErrorMessage
-        loading={loading}
+        loading={initialLoading}
         error={error}
         noResults={!hasMore && games.length === 0}
       />
 
-      {genreDetails && !loading && !error && (
+      {genreDetails && !initialLoading && !error && (
         <>
           <div className={styles.backButton}>
             <Link to="/genres">← Back to genres</Link>
@@ -68,6 +88,7 @@ const GenrePage = () => {
                 to={`/games/${game.id}`}
                 key={game.id}
                 className={styles.gameCardLink}
+                target="_blank"
               >
                 <GameCard game={game} />
               </Link>
@@ -76,10 +97,10 @@ const GenrePage = () => {
         </>
       )}
 
-      {hasMore && !loading && !error && (
+      {hasMore && !initialLoading && !error && (
         <div className={styles.loadMoreButton}>
-          <button type="button" onClick={() => setPage((prev) => prev + 1)}>
-            Load More
+          <button type="button" onClick={() => setPage((prev) => prev + 1)} disabled={pageLoading}>
+            {pageLoading ? "Wait..." : "Load More"}
           </button>
         </div>
       )}

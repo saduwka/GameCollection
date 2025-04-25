@@ -12,23 +12,24 @@ const ConsolePage = () => {
   const { id } = useParams();
   const [consoleDetails, setConsoleDetails] = useState(null);
   const [games, setGames] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState(null);
   
-  const navigate = useNavigate(); // добавлено использование useNavigate
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchConsoleDetails = async () => {
       try {
-        setLoading(true);
+        setInitialLoading(true);
         const details = await getConsoleDetails(id);
         setConsoleDetails(details);
-        setLoading(false);
+        setInitialLoading(false);
       } catch (error) {
         setError("Failed to fetch console details");
-        setLoading(false);
+        setInitialLoading(false);
       }
     };
     fetchConsoleDetails();
@@ -37,15 +38,22 @@ const ConsolePage = () => {
   useEffect(() => {
     const fetchGames = async () => {
       try {
+        setPageLoading(true);
         const consoleGames = await getGamesForConsole(id, page);
         if (consoleGames.length === 0) {
           setHasMore(false);
         } else {
-          setGames((prevGames) => [...prevGames, ...consoleGames]);
+          const sortedGames = consoleGames.sort((a, b) => b.rating - a.rating);
+          setGames((prevGames) => [...prevGames, ...sortedGames]);
+          if (consoleGames.length < 10) {
+            setHasMore(false);
+          }
         }
+        setPageLoading(false);
       } catch (error) {
         setError("Error fetching games");
         setHasMore(false);
+        setPageLoading(false);
       }
     };
     fetchGames();
@@ -66,26 +74,29 @@ const ConsolePage = () => {
         {consoleDetails ? `Games on ${consoleDetails.name}` : ""}
       </h2>
       <LoadingErrorMessage
-        loading={loading}
+        loading={initialLoading}
         error={error}
-        noResults={!loading && !error && games.length === 0}
+        noResults={!initialLoading && !error && games.length === 0}
       />
-      {!loading && !error && games.length > 0 && (
+      {!initialLoading && !error && games.length > 0 && (
         <div className={styles.gameList}>
           {games.map((game, index) => (
             <Link
-              to={`/games/${game.id}`}
-              key={`${game.id}-${index}`}
-              className={styles.gameCardLink}
-            >
-              <GameCard game={game} />
-            </Link>
+            to={`/games/${game.id}`}
+            key={`${game.id}-${index}`}
+            className={styles.gameCardLink}
+            target="_blank"
+          >
+            <GameCard game={game} />
+          </Link>
           ))}
         </div>
       )}
-      {hasMore && !loading && !error && (
+      {hasMore && !initialLoading && !error && (
         <div className={styles.loadMoreButton}>
-          <button onClick={() => setPage((prev) => prev + 1)}>Load More</button>
+          <button onClick={() => setPage((prev) => prev + 1)} disabled={pageLoading}>
+            {pageLoading ? "Wait..." : "Load More"}
+          </button>
         </div>
       )}
     </div>

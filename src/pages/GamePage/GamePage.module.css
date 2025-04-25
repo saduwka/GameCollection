@@ -1,3 +1,14 @@
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .gamePageContainer {
   display: flex;
   flex-direction: column;
@@ -162,5 +173,34 @@ img:hover {
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  animation: fadeInScale 0.4s ease-out;
 }
 
+.modalImageAnimated {
+  animation: fadeInScale 0.4s ease-out;
+}
+
+.modalNavButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
+  padding: 0 15px;
+}
+
+.modalNavButton:first-of-type {
+  left: -50px;
+}
+
+.modalNavButton:last-of-type {
+  right:-50px;
+}
+
+.modalNavButton:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}

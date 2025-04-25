@@ -20,6 +20,17 @@ p {
   margin-top: 10px;
 }
 
+.description {
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+  line-height: 1.5;
+  background-color: #646464;
+  padding: 10px;
+  border-radius: 8px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .gameList {
   display: flex;
   flex-direction: row;

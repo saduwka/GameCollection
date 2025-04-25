@@ -13,22 +13,23 @@ const DeveloperPage = () => {
   const navigate = useNavigate();
   const [developerDetails, setDeveloperDetails] = useState(null);
   const [games, setGames] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchDeveloperData = async () => {
       try {
-        setLoading(true);
+        setInitialLoading(true);
         const details = await getDeveloperDetails(id);
         const gamesList = await getGamesForDeveloper(id);
-  
+
         setDeveloperDetails(details);
-        setGames(gamesList);
-        setLoading(false);
+        const sortedGames = gamesList.sort((a, b) => b.rating - a.rating);
+        setGames(sortedGames);
+        setInitialLoading(false);
       } catch (error) {
         setError("Failed to fetch developer details or games");
-        setLoading(false);
+        setInitialLoading(false);
       }
     };
     fetchDeveloperData();
@@ -38,18 +39,20 @@ const DeveloperPage = () => {
     <div className={styles.developerPage}>
      <button onClick={() => navigate(-1)} className={styles.backButton}>← Back</button>
       <LoadingErrorMessage
-        loading={loading}
+        loading={initialLoading}
         error={error}
-        noResults={!loading && !error && !developerDetails}
+        noResults={!initialLoading && !error && !developerDetails}
       />
-      {!loading && !error && developerDetails && (
+      {!initialLoading && !error && developerDetails && (
         <div>
           <h1>{developerDetails.name}</h1>
-          <p>{
-            new DOMParser()
-              .parseFromString(developerDetails.description, "text/html")
-              .body.textContent
-          }</p>
+          <p className={styles.description}>
+            {
+              new DOMParser()
+                .parseFromString(developerDetails.description, "text/html")
+                .body.textContent
+            }
+          </p>
           <h2>Games by {developerDetails.name}</h2>
           <div className={styles.gameList}>
             {games.map((game) => (

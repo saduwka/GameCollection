@@ -9,9 +9,10 @@ function GamePage() {
   const navigate = useNavigate();
   const [gameDetails, setGameDetails] = useState(null);
   const [status, setStatus] = useState("");
-  const [modalImage, setModalImage] = useState(null);
+  const [modalIndex, setModalIndex] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [imageAnimationKey, setImageAnimationKey] = useState(0);
 
   useEffect(() => {
     const fetchGameDetails = async () => {
@@ -36,6 +37,10 @@ function GamePage() {
   }, [id]);
 
   const handleClick = (newStatus) => {
+    const images = [
+      gameDetails.background_image || gameDetails.image_background,
+      gameDetails.background_image_additional
+    ];
     const updatedStatus = status === newStatus ? "" : newStatus;
     setStatus(updatedStatus);
 
@@ -53,6 +58,10 @@ function GamePage() {
     localStorage.setItem("favorites", JSON.stringify(updated));
   };
 
+  const images = [
+    gameDetails?.background_image || gameDetails?.image_background,
+    gameDetails?.background_image_additional
+  ];
   return (
     <>
       <LoadingErrorMessage
@@ -75,20 +84,13 @@ function GamePage() {
                     gameDetails.background_image || gameDetails.image_background
                   }
                   alt={gameDetails.name}
-                  onClick={() =>
-                    setModalImage(
-                      gameDetails.background_image ||
-                        gameDetails.image_background
-                    )
-                  }
+                  onClick={() => setModalIndex(0)}
                 />
                 <img
                   className={styles.gamePageImage}
                   src={gameDetails.background_image_additional}
                   alt={gameDetails.name}
-                  onClick={() =>
-                    setModalImage(gameDetails.background_image_additional)
-                  }
+                  onClick={() => setModalIndex(1)}
                 />
               </div>
               <div className={styles.statusButtons}>
@@ -161,20 +163,39 @@ function GamePage() {
               )}
             </div>
           </div>
-          {modalImage && (
+          {modalIndex !== null && (
             <div
               className={styles.modalOverlay}
-              onClick={() => setModalImage(null)}
+              onClick={() => setModalIndex(null)}
             >
               <div
                 className={styles.modalContent}
                 onClick={(e) => e.stopPropagation()}
               >
+                <button
+                  className={styles.modalNavButton}
+                  onClick={() => {
+                    setModalIndex((prev) => (prev - 1 + images.length) % images.length);
+                    setImageAnimationKey((prev) => prev + 1);
+                  }}
+                >
+                  ‹
+                </button>
                 <img
-                  src={modalImage}
+                  key={imageAnimationKey}
+                  src={images[modalIndex]}
                   alt="Game Fullscreen"
-                  className={styles.modalImage}
+                  className={`${styles.modalImage} ${styles.modalImageAnimated}`}
                 />
+                <button
+                  className={styles.modalNavButton}
+                  onClick={() => {
+                    setModalIndex((prev) => (prev + 1) % images.length);
+                    setImageAnimationKey((prev) => prev + 1);
+                  }}
+                >
+                  ›
+                </button>
               </div>
             </div>
           )}
